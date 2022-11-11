@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<header>
+    <div class="contenedor estilo-navegador">
+        <img src="img/logo-removebg-preview.png" alt="" onclick="bienvenido()">
+        <nav class="navegacion">
+            <ul>
+                <li><a th:href="@{/inicio}">Inicio <br> <img src="img/inicio.png" alt=""></a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<body>
+    <div class="opciones">
+        <div class="opciones2">
+            <ul>
+                <li>
+                    <a th:href="@{/listaproductos}"><img src="img/magdalena.png" alt="">Productos</a>
+                </li>
+                <li>
+                    <a th:href="@{/usuario/listausuarios}"><img src="img/usuario_admin.png" alt="">Usuarios</a>
+                </li>
+            </ul>
+        </div>
+    </div>    
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th=”http://www.thymeleaf.org”>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/botonpdf.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<header><div class="contenedor estilo-navegador">
+    <a th:href="@{/inicio}"><img src="img/logo-removebg-preview.png" alt="" onclick="bienvenido()"></a>
+        <nav class="navegacion">
+            <ul>
+                <li><a th:href="@{/inicio}">Inicio <br><img src="img/inicio.png"alt=""></a></li>
+                <li><a th:href="@{/usuario/listausuarios}">Usuarios <br> <img src="img/usuario.png" alt=""></a></li>
+                <li><a th:href="@{/productos/nuevo}">Crear <br> <img src="img/anadir.png" alt=""></a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<body>
+	<div id="main-container">
+
+
+		<table id="productos">
+			<thead>
+				<tr>
+					<th>ID</th>
+                    <th>Categoria</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Precio</th>
+                    <th>Acciones</th>
+                </tr>
+			</thead>
+            <tbody>
+            <tr th:each="producto : ${listaProductos}">
+                <td th:text="${producto.idproducto}"></td>
+                <td th:text="${producto.categoria.nombre}"></td>
+                <td th:text="${producto.nombre}"></td>
+                <td th:text="${producto.descripcion}"></td>
+                <td th:text="${producto.precio}"></td>
+                <td>
+                    <a th:href="@{'/productos/editar'+'/'+${producto.idproducto}}" class="btn btn-info">Editar</a>
+                    &nbsp;&nbsp;
+                    <a th:href="@{'/productos/eliminar'+'/'+${producto.idproducto}}" class="btn btn-danger">Eliminar</a>
+                </td>
+
+            <tr/>
+            </tbody>
+		</table>
+        <div th:fragment="carrito">
+            <div class="container">
+                <input type="checkbox" id="btn-mas">
+                <div class="carrito">
+                    <a href="listaproductos/?format=pdf" title="Exportar en PDF" target="_blank"><img src="../img/pdf.png" alt="" ></a>
+                    <a href="listaproductos/?format=xls" title="Exportar en Excel"><img src="../img/excel.png" alt="" ></a>
+                </div>
+            </div>
+        </div>
+        
+
+	</div>
+</body>
+</html>

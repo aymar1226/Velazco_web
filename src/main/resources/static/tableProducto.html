@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<header>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <div class="contenedor estilo-navegador">
+        <img src="img/logo-removebg-preview.png" alt="" onclick="bienvenido()">
+        <nav class="navegacion">
+            <ul>
+                <li><a href="index.html">Login <br><img src="img/candado.png"alt=""></a></li>
+                <li><a href="tableUsuarios.html">Usuarios <br> <img src="img/inicio.png" alt=""></a></li>
+                <li><a href="tableProducto.html">Productos <br> <img src="img/nosotros.png" alt=""></a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<body>
+	<div id="main-container">
+
+		<table id="productos">
+			<thead>
+				<tr>
+					<th>ID</th><th>Categoria</th><th>Nombre</th><th>Descripción</th><th>Stock</th><th>Precio</th><th>Estado</th><th>Borrar</th>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+            
+		</table>
+	</div>
+</body>
+<script src="js/productos.js"></script>
+</html>

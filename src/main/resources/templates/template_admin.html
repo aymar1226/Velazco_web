@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/productos.css">
+    <link rel="stylesheet" href="css/dulces.css">
+    <link rel="stylesheet" href="css/boton.css">
+</head>
+<div th:fragment="header">
+    <header>
+        <div class="contenedor estilo-navegador">
+            <img src="img/logo-removebg-preview.png" alt="" onclick="bienvenido()">
+            <nav class="navegacion">
+                <ul>
+                    <li><a th:href="@{/admin}">Admin<br><img src="img/admin.png"alt=""></a></li>
+                    <li><a th:href="@{/inicio}">Inicio <br> <img src="img/inicio.png" alt=""></a></li>
+                    <li><a th:href="@{/nosotros}">Nosotros <br> <img src="img/nosotros.png" alt=""></a></li>
+                    <li><a th:href="@{/categorias}">Productos <br> <img src="img/cup.png" alt=""></a></li>
+                    <li><a th:href="@{/usuario/cerrar}">Cerrar Sesion <br> <img src="img/salida.png" alt=""></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+</div>
+
+</body>
+</html>

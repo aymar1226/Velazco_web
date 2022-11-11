@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventario</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/productoCrear.css}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="">Añadir al carrito</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" href="/">Inicio</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+    <div class="container text-center contenedor">
+        <div>
+            <h1 class="contenedor_titulo"> Comprar producto</h1>
+        </div>
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a href="#"> <img class="img-fluid rounded"
+                                          th:src="@{/img/{img} (img=${producto.imagen})  }" alt="" width="700" height="200">
+                        </a>
+                    </div>
+                    <div class="col-lg-6">
+                        <form th:action="@{/carrito}" method="POST">
+                            <input type="hidden" th:value="${producto.idproducto}" name="id">
+                            <h2 class="card-title" th:text="${producto.nombre}"></h2>
+
+                            <ul class="list-group">
+                                <li class="list-group-item"><h5 th:text=" 'Precio: '+ ${producto.precio} "></h5></li>
+                                <li class="list-group-item">
+                                    <p th:text=" 'Descripción: '+ ${producto.descripcion} "></p>
+                                </li>
+                                <li class="list-group-item"><h6>
+                                    Cantidad: <input type="number" id="cantidad" name="cantidad"
+                                                     autocomplete="off" min="1" max="10" value="1">
+                                </h6></li>
+                            </ul>
+
+
+                            <button type="submit" class="botons">Añadir al
+                                carrito</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

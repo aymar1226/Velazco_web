@@ -1,0 +1,53 @@
+body{
+    background: url(../img/fondo.jpg);
+}
+
+.navegador {
+    background-color: rgb(241, 205, 147);
+        border-radius: 10px;
+        border: 3px solid #890F0D;
+}
+
+.navegador2 {
+    background-color: rgb(241, 205, 147);
+        border-radius: 10px;
+        border: 3px solid #890F0D;
+}
+
+button{
+    background-color: #D91B1B; /* Green */
+        border: none;
+        border-radius: 10px;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        width: 90%;
+        margin: auto;
+}
+button:hover {background-color: #8C1E06}
+
+button:active {
+  background-color: #860E0E;
+  box-shadow: 0 5px #000;
+  transform: translateY(4px);
+}
+
+.orden{
+    color: #fff;
+    text-decoration: none;
+}
+
+.orden:hover{
+            color:rgb(241, 205, 147);
+}
+
+a {
+    color: red;
+}
+
+a:hover {
+    color: black;
+}

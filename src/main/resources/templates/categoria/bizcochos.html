@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/productos.css">
+    <link rel="stylesheet" href="css/dulces.css">
+    <link rel="stylesheet" href="css/boton.css">
+</head>
+    <div th:include="/template_notusuario.html::header_notuser" th:if="${sesion==null}"></div>
+    <div th:include="/template_usuario.html::header_user" th:unless="${sesion==null}"></div>
+    <div th:include="/template_admin.html::header" th:if="${rolsesion=='ADMIN'}"></div>
+<body>
+    <div th:include="/template_usuario.html::opciones"></div>
+    <main class="dulces">
+        <div class="dulces2">
+            <ul>
+                <li th:each="producto: ${listaProductos}">
+                    <img th:src="@{/img/{img}(img=${producto.imagen})}" alt="">
+                    <h2 th:text="${producto.nombre}"></h2>
+                    <p th:text="${producto.descripcion}"></p>
+                    <h4 th:text="'S/'+${producto.precio}"></h4>
+                    <a th:href="@{/productohome/{id} (id=${producto.idproducto}) }">Añadir al carrito</a>
+                </li>
+            </ul>
+        </div>
+    </main>
+    <div th:include="/template_usuario.html::carrito" th:unless="${sesion==null}"></div>
+</body>
+</html>

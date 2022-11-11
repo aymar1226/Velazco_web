@@ -1,0 +1,60 @@
+
+.dulces2 ul{
+    display: flex;
+    flex-wrap:wrap;
+}
+
+
+.dulces2 ul li{
+    background: rgb(150, 126, 118);
+    border: solid 1px #000;
+    padding: 10px;
+    text-align: center;
+    margin: 25px;
+    width: 8cm;
+    height: 10.2cm    ;
+    border-radius: 30px;
+    list-style: none;
+}
+.dulces2 ul li img{
+    width: 300px;
+    height: 200px;
+    display: inline-block;
+    border-radius: 15px;
+}
+.dulces2 ul li h2{
+    color: #f5ed82;
+}
+.dulces2 ul li p{
+    color: #EEEEEE;
+}
+.dulces2 ul li h4{
+    color: #f1e534;
+}
+
+.dulces2 ul li a{
+    background: rgb(215, 192, 174);
+    border: solid 1px rgb(241, 205, 147);
+    float: center;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    margin: 10px;
+    width: 8cm;
+    height: 10cm    ;
+    border-radius: 50px;
+    text-decoration: none;
+    list-style-type: none;
+    color: black;
+}
+
+.dulces2 ul li a:hover{
+    background-color: #890F0D;
+    color:rgb(241, 205, 147);
+}
+
+.dulces2{
+    margin-top: 10rem;
+    margin-left: 12rem;
+}
+

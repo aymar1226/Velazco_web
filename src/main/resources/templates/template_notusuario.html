@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/productos.css">
+    <link rel="stylesheet" href="css/dulces.css">
+    <link rel="stylesheet" href="css/boton.css">
+</head>
+<div th:fragment="header_notuser">
+    <header>
+        <div class="contenedor estilo-navegador">
+            <img src="img/logo-removebg-preview.png" alt="" onclick="bienvenido()">
+            <nav class="navegacion">
+                <ul>
+                    <li><a th:href="@{/}">Login <br><img src="img/candado.png"alt=""></a></li>
+                    <li><a th:href="@{/inicio}">Inicio <br> <img src="img/inicio.png" alt=""></a></li>
+                    <li><a th:href="@{/nosotros}">Nosotros <br> <img src="img/nosotros.png" alt=""></a></li>
+                    <li><a th:href="@{/categorias}">Productos <br> <img src="img/cup.png" alt=""></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+</div>
+<div th:fragment="opciones">
+    <main class="info-productos">
+        <div class="opciones">
+            <ul>
+                <li><a th:href="@{/galletas}"><h3>Galletas</h3>
+                    <img src="/../img/cookie.png" alt=""></a></li>
+                <li><a th:href="@{/bizcochos}"><h3>Bizcochos</h3>
+                    <img src="/../img/bizcocho.png" alt=""></a></li>
+                <li><a th:href="@{/pasteles}"><h3>Pasteles</h3>
+                    <img src="/../img/pastel.png" alt=""></a></li>
+                <li><a th:href="@{/dulces}"><h3>Dulces</h3>
+                    <img src="/../img/turron.png" alt=""></a></li>
+            </ul>
+        </div>
+    </main>
+</div>
+<div th:fragment="carrito">
+    <div class="container">
+        <input type="checkbox" id="btn-mas">
+        <div class="carrito">
+            <a th:href="@{/getCarrito}"><img src="../img/icono_carrito.png" alt="" ></a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+
+.info-productos{
+    margin-top: 8rem;
+    position:fixed;
+    display: flex;
+    left: 0;
+    top: 0;
+    height: 100%;
+    
+}
+.info-productos a{
+    color: red  ;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 0.5cm;
+    text-decoration: none;
+}
+.opciones{
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(250, 200, 120);
+    top: 0;
+}
+.opciones ul{
+    margin: 0;
+    padding:0;
+    list-style: none;
+}
+.opciones ul li a{
+    display: block;
+    padding: 0.4rem 1rem;
+    border-radius: 5px;
+    text-align: center;
+    transition: all 0.4s linear;
+}
+.opciones ul li a:hover{
+    background-color: #890F0D;
+    color:rgb(241, 205, 147);
+}
+.opciones ul li a img{
+    width:1cm;
+    height:1cm;
+    align-items: center;
+}
+.texto{
+    margin-top: 13em;
+    margin-left: 18em;
+}
+

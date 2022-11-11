@@ -1,0 +1,32 @@
+
+.nosotros{
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+.nosotros ul li{
+    display: inline-block;
+    align-items: center;
+    background: rgb(216, 38, 26);
+    border: solid 1px #D9CE3F;
+    padding: 1em;
+    border-radius: 20px;
+}
+h1{
+    text-align: center;
+    color: #D9CE3F;
+}
+.nosotros p{
+    background-color: #EEEEEE;
+    height: 2.8cm;
+    width: 15cm;
+    padding: 1.5em;
+    text-align: justify;
+}
+
+p {
+    border-radius: 20px;
+    border: solid 2px rgb(28, 52, 132);
+}

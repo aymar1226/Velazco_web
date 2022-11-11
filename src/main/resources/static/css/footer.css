@@ -1,0 +1,38 @@
+
+footer{
+    background: rgb(28, 52, 132);
+    border: solid 1px #ccc;
+    color: rgb(243, 234, 234);
+    display: flex;
+    margin-bottom: auto;
+    margin-top: 125.4px;
+    text-align: center;
+    align-items: center;
+}
+.redes{
+    display: flex;
+    list-style: none;
+    padding-right: 25%;
+    text-align: center ;
+
+}
+    .redes{
+        list-style: none;
+
+    }
+
+    .redes li {
+        margin-left: 100px ;
+        margin-right: 100px;
+        text-align: center;
+    }
+
+    .telefono {
+        margin-left: 500px  ;
+    }
+
+    .redes img{
+        width: 30px;
+        height: 30px;
+        padding: 10px;
+    }
