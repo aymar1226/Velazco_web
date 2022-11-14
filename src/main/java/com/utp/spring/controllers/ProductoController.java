@@ -4,10 +4,7 @@ import com.utp.spring.models.dao.IProductoDAO;
 import com.utp.spring.models.entity.Categoria;
 import com.utp.spring.models.entity.Producto;
 import com.utp.spring.models.entity.Usuario;
-import com.utp.spring.services.ICategoriaService;
-import com.utp.spring.services.IProductoService;
-import com.utp.spring.services.ProductoServiceImpl;
-import com.utp.spring.services.UploadFileService;
+import com.utp.spring.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +25,8 @@ public class ProductoController {
 
     @Autowired
     private IProductoService productoService;
-
+    @Autowired
+    private IUsuarioService usuarioService;
     @Autowired
     private ICategoriaService categoriaService;
     @Autowired
@@ -52,11 +50,13 @@ public class ProductoController {
 
     @GetMapping("/bizcochos")
     public String filtrarBizcocho(Model modelo, HttpSession session){
-        //eleccion header
-        session.getAttribute("idusuario");
-        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
+        //validando si es nulo
+        if(session.getAttribute("idusuario")!=null){
+            modelo.addAttribute(usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get());
+        }
 
-        session.getAttribute("rolusuario");
+        //eleccion header
+        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
 
         //FILTRO
@@ -68,11 +68,13 @@ public class ProductoController {
 
     @GetMapping("/galletas")
     public String filtrarGalleta(Model modelo,HttpSession session){
-        //eleccion header
-        session.getAttribute("idusuario");
-        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
+        //validando si es nulo
+        if(session.getAttribute("idusuario")!=null){
+            modelo.addAttribute(usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get());
+        }
 
-        session.getAttribute("rolusuario");
+        //eleccion header
+        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
 
         //FILTRO
@@ -84,11 +86,13 @@ public class ProductoController {
 
     @GetMapping("/pasteles")
     public String filtrarPastel(Model modelo,HttpSession session){
-        //eleccion header
-        session.getAttribute("idusuario");
-        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
+        //validando si es nulo
+        if(session.getAttribute("idusuario")!=null){
+            modelo.addAttribute(usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get());
+        }
 
-        session.getAttribute("rolusuario");
+        //eleccion header
+        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
 
         //FILTRO
@@ -100,11 +104,13 @@ public class ProductoController {
 
     @GetMapping("/dulces")
     public String filtrarDulce(Model modelo,HttpSession session){
-        //eleccion header
-        session.getAttribute("idusuario");
-        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
+        //validando si es nulo
+        if(session.getAttribute("idusuario")!=null){
+            modelo.addAttribute(usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get());
+        }
 
-        session.getAttribute("rolusuario");
+        //eleccion header
+        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
 
         //FILTRO

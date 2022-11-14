@@ -2,6 +2,8 @@ package com.utp.spring.controllers;
 
 import com.utp.spring.models.dao.ICategoriaDAO;
 import com.utp.spring.models.entity.Categoria;
+import com.utp.spring.services.ICategoriaService;
+import com.utp.spring.services.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,17 +16,20 @@ import java.util.List;
 public class CategoriaController {
 
     @Autowired
-    private ICategoriaDAO categoriaDAO;
+    private ICategoriaService categoriaService;
 
+    @Autowired
+    private IUsuarioService usuarioService;
     @GetMapping("/categorias")
     public String listarCategoria(Model modelo, HttpSession session){
-        session.getAttribute("idusuario");
-        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
 
-        session.getAttribute("rolusuario");
+        if(session.getAttribute("idusuario")!=null){
+            modelo.addAttribute(usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get());
+        }
+        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
 
-        List<Categoria> listaCategorias = categoriaDAO.findAll();
+        List<Categoria> listaCategorias = categoriaService.findAll();
         modelo.addAttribute("listaCategorias", listaCategorias);
         return "productos";
     }

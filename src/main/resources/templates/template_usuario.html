@@ -1,30 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/productos.css">
     <link rel="stylesheet" href="css/dulces.css">
     <link rel="stylesheet" href="css/boton.css">
 </head>
-<div th:fragment="header_notuser">
-    <header>
-        <div class="contenedor estilo-navegador">
-            <img src="img/logo-removebg-preview.png" alt="" onclick="bienvenido()">
-            <nav class="navegacion">
-                <ul>
-                    <li><a  href="@{/}">Login <br><img src="img/candado.png"alt=""></a></li>
-                    <li><a th:href="@{/inicio}">Inicio <br> <img src="img/inicio.png" alt=""></a></li>
-                    <li><a th:href="@{/nosotros}">Nosotros <br> <img src="img/nosotros.png" alt=""></a></li>
-                    <li><a th:href="@{/categorias}">Productos <br> <img src="img/cup.png" alt=""></a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 </div>
 <div th:fragment="header_user">
     <header>
@@ -35,7 +22,12 @@
                     <li><a th:href="@{/inicio}">Inicio <br> <img src="img/inicio.png" alt=""></a></li>
                     <li><a th:href="@{/nosotros}">Nosotros <br> <img src="img/nosotros.png" alt=""></a></li>
                     <li><a th:href="@{/categorias}">Productos <br> <img src="img/cup.png" alt=""></a></li>
-                    <li><a th:href="@{/usuario/cerrar}">Cerrar Sesion <br> <img src="img/salida.png" alt=""></a></li>
+                    <li><a><img src="img/agregar-usuario.png"><h4 class="user" th:text="${usuario.nombre}"></h4></a>
+                        <ul class="desl">
+                            <li><a class="desl_1" href="">Perfil</a></li>
+                            <li sec:authorize="isAuthenticated()"><a class="desl_3" th:href="@{/logout}">Cerrar sesion</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </nav>
         </div>

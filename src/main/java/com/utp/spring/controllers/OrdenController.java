@@ -118,6 +118,7 @@ public class OrdenController {
 
         Usuario usuario =usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get();
 
+
         modelo.addAttribute("carrito",detalles);
         modelo.addAttribute("orden",orden);
         modelo.addAttribute("usuario",usuario);

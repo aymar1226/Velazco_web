@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Cabin:ital@1&display=swap" rel="stylesheet">
 </head>
-    <div th:include="/template_notusuario.html::header_notuser" th:if="${sesion==null}"></div>
-    <div th:include="/template_usuario.html::header_user" th:unless="${sesion==null}"></div>
+    <div th:include="/template_notusuario.html::header_notuser" th:if="${rolsesion==null}"></div>
+    <div th:include="/template_usuario.html::header_user" th:if="${rolsesion=='USER'}"></div>
     <div th:include="/template_admin.html::header" th:if="${rolsesion=='ADMIN'}"></div>
 <body>
 <div class="dulces2">

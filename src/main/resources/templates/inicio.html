@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PAG WEB</title>
-    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/nosotros.css">
     <link rel="stylesheet" href="css/footer.css">
 </head>
-    <div th:include="/template_notusuario.html::header_notuser" th:if="${sesion==null}"></div>
-    <div th:include="/template_usuario.html::header_user" th:unless="${sesion==null}"></div>
+    <div th:include="/template_notusuario.html::header_notuser" th:if="${rolsesion==null}"></div>
+    <div th:include="/template_usuario.html::header_user" th:if="${rolsesion=='USER'}"></div>
     <div th:include="/template_admin.html::header" th:if="${rolsesion=='ADMIN'}"></div>
 <body>
 <div class="slider">

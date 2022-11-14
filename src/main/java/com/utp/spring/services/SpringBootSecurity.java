@@ -1,5 +1,6 @@
 package com.utp.spring.services;
 
+import com.utp.spring.models.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,8 +9,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.servlet.http.HttpSession;
+import java.util.Optional;
 
 @Configuration
 @EnableWebSecurity
@@ -17,6 +23,8 @@ public class SpringBootSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -26,16 +34,20 @@ public class SpringBootSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/css/**").permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/productos/editar/**").hasRole("ADMIN")
                 .antMatchers("/productos/nuevo").hasRole("ADMIN")
                 .antMatchers("/listaproductos").hasRole("ADMIN")
                 .antMatchers("/usuario/listausuarios").hasRole("ADMIN")
-                .antMatchers("/productohome/**").hasRole("ADMIN")
-                .antMatchers("/productohome/**").hasRole("USER")
+                .antMatchers("/productohome/**").authenticated()
                 .and().formLogin().loginPage("/usuario/login")
-                .permitAll().defaultSuccessUrl("/usuario/acceder").permitAll();
+                .permitAll().defaultSuccessUrl("/usuario/acceder").and()
+                .logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/usuario/login?logout")
+                .permitAll();
     }
 
     @Bean

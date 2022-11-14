@@ -21,14 +21,18 @@ header{
     margin: 0;
     padding: 0;
     list-style: none;
-    
 }
-    .navegacion ul li{
+
+.user{
+    margin: 0;
+}
+
+    .navegacion  >ul >li{
         display: inline-block;
         padding: 1rem 0.5rem 0.5rem 0rem;
         
     }
-        .navegacion ul li a{
+        .navegacion >ul >li >a{
             border-right: 5px solid #890F0D;
             border-bottom: 5px solid #890F0D;
             display: block;
@@ -39,12 +43,12 @@ header{
             font-size: x-large;
             box-shadow: 10px;
         }
-        .navegacion ul li a:hover{
+        .navegacion >ul >li >a:hover{
             background-color: #890F0D;
             color:rgb(241, 205, 147);
             border-color:rgb(241, 205, 147);
         }
-    .navegacion ul li a img{
+    .navegacion a img{
         width:1cm;
         height:1cm;
         align-items: center;
@@ -57,4 +61,63 @@ body{
     height: 100px;
     width: 360px;
     margin: 20px 20px 20px 20px;
+}
+
+/*Deslizable*/
+.desl li a{
+    background-color: #890F0D;
+    color: rgb(250, 200, 120);
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+}
+.desl li a:hover{
+    background-color: rgb(250, 200, 120);
+    color: #890F0D;
+}
+.desl .desl_1 , .desl_2 {
+    border-bottom: 2px solid ;
+} 
+
+.desl_1{
+    border-top-right-radius: 14px;
+    border-top-left-radius: 14px;
+}
+.desl_3{
+    border-bottom-right-radius: 14px;
+    border-bottom-left-radius: 14px;
+    border-bottom: 6px solid rgb(250, 200, 120);
+}
+.desl_1, .desl_2, .desl_3{
+    border-right:6px solid rgb(250, 200, 120);
+    
+}
+.desl_1:hover, .desl_2:hover, .desl_3:hover{
+    border-right:6px solid #890F0D;
+}
+
+.desl_3:hover{
+    border-bottom: 6px solid #890F0D;
+}
+
+.navegacion li ul{
+    display: none;
+    position: absolute;
+    min-width: 155px;
+}
+
+.navegacion li:hover > ul{
+    display: block;
+}
+
+.desl_1:active,.desl_2:active{
+    box-shadow: 0 0 7px;
+    transform: translatex(2px);
+    border-right: none;
+}
+.desl_3:active{
+    box-shadow: 0 0 7px;
+    transform: translatex(2px) translateY(1.5px);
+    border-bottom: none;
+    border-right: none;
 }

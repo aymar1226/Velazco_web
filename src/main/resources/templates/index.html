@@ -11,6 +11,14 @@
         <div class="login-box">
             <img class="avatar" th:src="@{/img/logo.jpeg}" alt="logo">
             <h1>INICIAR SESION</h1>
+            <div th:if=${param.error}>
+                <div class="alert alert-danger">Usuario o contraseña
+                    inválidos</div>
+            </div>
+            <div th:if=${param.logout}>
+                <div class="alert alert-info">Ha cerrado sesión exitosamente
+                </div>
+            </div>
             <form th:action="@{/usuario/login}" method="post">
                 <label id="correo">Correo</label>
                 <input id="username" name="username" type="text" placeholder="Ingresar correo" required>
@@ -22,7 +30,6 @@
 
                 <a th:href="@{/usuario/registro}">Registrate</a><br>
                 <a th:href="@{/inicio}">Continuar sin registrarse</a>
-
             </form>
         </div>
 </body>
