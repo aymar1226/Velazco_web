@@ -32,28 +32,17 @@ public class AppController {
             modelo.addAttribute(usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get());
         }
 
-        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
 
 
         return "inicio";
     }
 
-    @GetMapping("/inicio0")
-    public String sinRegistrar(Model modelo,HttpSession session) {
 
-        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
-        modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
-
-        return "inicio";
-    }
 
     @GetMapping("/nosotros")
     public String verNosotros(Model modelo,HttpSession session){
-        session.getAttribute("idusuario");
-        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
 
-        session.getAttribute("rolusuario");
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
         return "nosotros";
     }

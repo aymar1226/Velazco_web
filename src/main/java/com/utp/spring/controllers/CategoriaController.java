@@ -26,7 +26,7 @@ public class CategoriaController {
         if(session.getAttribute("idusuario")!=null){
             modelo.addAttribute(usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get());
         }
-        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
+
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
 
         List<Categoria> listaCategorias = categoriaService.findAll();

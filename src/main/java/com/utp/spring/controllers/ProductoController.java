@@ -56,7 +56,6 @@ public class ProductoController {
         }
 
         //eleccion header
-        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
 
         //FILTRO
@@ -74,7 +73,6 @@ public class ProductoController {
         }
 
         //eleccion header
-        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
 
         //FILTRO
@@ -92,7 +90,6 @@ public class ProductoController {
         }
 
         //eleccion header
-        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
 
         //FILTRO
@@ -110,7 +107,6 @@ public class ProductoController {
         }
 
         //eleccion header
-        modelo.addAttribute("sesion",session.getAttribute("idusuario"));
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
 
         //FILTRO

@@ -12,7 +12,7 @@
             <img class="avatar" th:src="@{/img/logo.jpeg}" alt="logo">
             <h1>INICIAR SESION</h1>
             <div th:if=${param.error}>
-                <div class="alert alert-danger">Usuario o contraseña
+                <div class="alert alert-danger">Correo o contraseña
                     inválidos</div>
             </div>
             <div th:if=${param.logout}>

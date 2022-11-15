@@ -45,7 +45,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/login")
-    String login(Usuario usuario,Model modelo,HttpSession session){
+    String login(){
         return "index";
     }
 
@@ -55,11 +55,7 @@ public class UsuarioController {
         if (user.isPresent()){
             session.setAttribute("idusuario",user.get().getIdusuario());
             session.setAttribute("rolusuario",user.get().getRol());
-            if(user.get().getRol().equals("ADMIN")){
-                return "redirect:/inicio";
-            }else {
-                return "redirect:/inicio";
-            }
+            return "redirect:/inicio";
         }else{
             return "redirect:/";
         }
