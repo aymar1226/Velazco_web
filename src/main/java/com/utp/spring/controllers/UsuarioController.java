@@ -46,7 +46,6 @@ public class UsuarioController {
 
     @GetMapping("/login")
     String login(Usuario usuario,Model modelo,HttpSession session){
-
         return "index";
     }
 

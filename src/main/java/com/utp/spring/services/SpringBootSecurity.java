@@ -25,7 +25,6 @@ public class SpringBootSecurity extends WebSecurityConfigurerAdapter {
     private UserDetailsService userDetailsService;
 
 
-
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(getEncoder());
@@ -40,8 +39,10 @@ public class SpringBootSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/listaproductos").hasRole("ADMIN")
                 .antMatchers("/usuario/listausuarios").hasRole("ADMIN")
                 .antMatchers("/productohome/**").authenticated()
+                .antMatchers("/getCarrito").authenticated()
                 .and().formLogin().loginPage("/usuario/login")
-                .permitAll().defaultSuccessUrl("/usuario/acceder").and()
+                .permitAll().defaultSuccessUrl("/usuario/acceder")
+                .failureUrl("/usuario/login?error=true").and()
                 .logout()
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
