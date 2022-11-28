@@ -24,6 +24,12 @@ public class AppController {
         return "index";
     }
 
+    @GetMapping("/pago")
+    public String verPago(){
+
+        return "Pago";
+    }
+
 
     @GetMapping("/inicio")
     public String verInicio(Model modelo,HttpSession session) {
@@ -52,4 +58,5 @@ public class AppController {
     public String verAdmin(){
         return "administrador/admin";
     }
+
 }
