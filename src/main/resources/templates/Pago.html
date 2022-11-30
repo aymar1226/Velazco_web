@@ -12,7 +12,7 @@
 
 <div class="container">
 
-    <form action="">
+    <form th:action="@{/pagartarjeta}" method="post">
 
         <div class="row">
 
@@ -21,33 +21,17 @@
                 <h3 class="title">Dirección de la Facturación</h3>
 
                 <div class="inputBox">
-                    <span>Nombre Completo :</span>
-                    <input type="text" placeholder="john deo">
-                </div>
-                <div class="inputBox">
                     <span>Gmail :</span>
-                    <input type="email" placeholder="example@example.com">
+                    <input type="email" name="correo" placeholder="example@example.com">
                 </div>
                 <div class="inputBox">
                     <span>Dirección :</span>
-                    <input type="text" placeholder="calle -  localidad">
+                    <input type="text" name="direccion" placeholder="calle -  localidad">
                 </div>
                 <div class="inputBox">
                     <span>Ciudad :</span>
-                    <input type="text" placeholder="ica">
+                    <input type="text" name="ciudad" placeholder="ica">
                 </div>
-
-                <div class="flex">
-                    <div class="inputBox">
-                        <span>Distrito :</span>
-                        <input type="text" placeholder="la Tinguiña">
-                    </div>
-                    <div class="inputBox">
-                        <span>codigo postal :</span>
-                        <input type="text" placeholder="11 000">
-                    </div>
-                </div>
-
             </div>
 
             <div class="col">
@@ -60,25 +44,25 @@
                 </div>
                 <div class="inputBox">
                     <span>titular de la tarjeta :</span>
-                    <input type="text" placeholder="mr. john deo">
+                    <input type="text"name="titular" placeholder="mr. john deo">
                 </div>
                 <div class="inputBox">
                     <span>numero de tarjeta :</span>
-                    <input type="number" placeholder="1111-2222-3333-4444">
+                    <input type="number" name="nro_tarjeta" placeholder="1111-2222-3333-4444">
                 </div>
                 <div class="inputBox">
                     <span>mes de expiración :</span>
-                    <input type="text" placeholder="january">
+                    <input type="text" name="mes_exp" placeholder="january">
                 </div>
 
                 <div class="flex">
                     <div class="inputBox">
                         <span>Año de expiración:</span>
-                        <input type="number" placeholder="2022">
+                        <input type="number" name="año_exp" placeholder="2022">
                     </div>
                     <div class="inputBox">
                         <span>CVV :</span>
-                        <input type="text" placeholder="123">
+                        <input type="text" name="cvv" placeholder="123">
                     </div>
                 </div>
 
@@ -86,7 +70,7 @@
     
         </div>
 
-        <input type="submit" value="Procesar el pago" class="submit-btn">
+        <button type="submit" value="Procesar el pago" class="submit-btn">Procesar el pago</button>
 
     </form>
 

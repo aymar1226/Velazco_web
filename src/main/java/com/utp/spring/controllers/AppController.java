@@ -24,11 +24,7 @@ public class AppController {
         return "index";
     }
 
-    @GetMapping("/pago")
-    public String verPago(){
 
-        return "Pago";
-    }
 
 
     @GetMapping("/inicio")
