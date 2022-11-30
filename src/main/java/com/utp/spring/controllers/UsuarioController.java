@@ -67,6 +67,11 @@ public class UsuarioController {
         session.removeAttribute("rolusuario");
         return "redirect:/";
     }
+
+    @GetMapping("/perfil")
+    public String verPerfil(){
+        return "perfil";
+    }
     /*@PostMapping
     public ResponseEntity<Usuario> crear(@RequestBody Usuario t){
         Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);

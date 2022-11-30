@@ -25,8 +25,6 @@ public class AppController {
     }
 
 
-
-
     @GetMapping("/inicio")
     public String verInicio(Model modelo,HttpSession session) {
 
