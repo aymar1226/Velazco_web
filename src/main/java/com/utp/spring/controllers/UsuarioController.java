@@ -69,7 +69,11 @@ public class UsuarioController {
     }
 
     @GetMapping("/perfil")
-    public String verPerfil(){
+    public String verPerfil(Model modelo, HttpSession session){
+        if(session.getAttribute("idusuario")!=null){
+            modelo.addAttribute(usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get());
+        }
+        modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
         return "perfil";
     }
     /*@PostMapping
