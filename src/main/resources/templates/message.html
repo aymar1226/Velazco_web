@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nosotros.css">
+  <link rel="stylesheet" href="css/footer.css">
+</head>
+<div th:include="/template_notusuario.html::header_notuser" th:if="${rolsesion==null}"></div>
+<div th:include="/template_usuario.html::header_user" sec:authorize="hasRole('USER')"></div>
+<div th:include="/template_admin.html::header" sec:authorize="hasRole('ADMIN')"></div>
+
+<style>
+  .container {
+    margin-top: 200px;
+  }
+</style>
+<body>
+
+<div class="container">
+  <div class="text-center">
+    <h2>Contacto</h2>
+    <p>Gracias por su comentario</p>
+  </div>
+</div>
+</body>
+</html>
