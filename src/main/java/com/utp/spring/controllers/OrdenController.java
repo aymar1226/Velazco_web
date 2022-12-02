@@ -148,7 +148,7 @@ public class OrdenController {
         orden = new Orden();
         detalles.clear();
 
-        return "redirect:/inicio";
+        return "redirect:/pago";
     }
 
 }
