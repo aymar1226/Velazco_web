@@ -19,14 +19,18 @@
 <div class="container">
     <div>
 
-        <form th:action="@{/contacto}" method="post">
+        <form th:action="@{/contacto}" method="post" enctype="multipart/form-data">
             <h2>CONTACTO</h2>
             <input class="imput2" type="text" name="fullname" placeholder="Nombre Completo">
             <input class="imput2" type="email" name="email" placeholder="E-mail">
             <input class="imput2" type="text" name="subject" placeholder="Asunto">
             <textarea class="imput2" name="content" placeholder="Escriba aqui su mensaje"></textarea>
-
+            <input type="file" style="font-size: 14px;" id="input_10" name="attachment" multiple=""
+                   class="form-upload-multiple" data-imagevalidate="yes"
+                   data-file-accept="pdf, doc, docx, xls, xlsx, csv, txt, rtf, html, zip, mp3, wma, mpg, flv, avi, jpg, jpeg, png, gif"
+                   data-file-maxsize="10854" data-file-minsize="0" data-file-limit="" data-component="fileupload" />
             <input type="submit" value="Send" id="boton">
+
         </form>
     </div>
 </div>

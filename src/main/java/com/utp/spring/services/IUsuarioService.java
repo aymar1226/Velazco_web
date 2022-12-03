@@ -1,5 +1,6 @@
 package com.utp.spring.services;
 
+import com.utp.spring.models.entity.Producto;
 import com.utp.spring.models.entity.Usuario;
 
 import java.util.List;
@@ -11,7 +12,6 @@ public interface IUsuarioService {
     List<Usuario> findAll();
     Usuario save(Usuario usuario);
     void delete(Usuario usuario);
-
     Optional<Usuario> findByEmail(String correo);
 
 

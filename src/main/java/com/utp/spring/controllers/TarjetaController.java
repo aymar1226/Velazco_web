@@ -23,6 +23,7 @@ public class TarjetaController {
 
     @GetMapping("/pago")
     public String verPago(){
+
         return "Pago";
     }
 

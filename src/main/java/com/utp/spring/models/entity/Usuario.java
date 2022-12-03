@@ -37,6 +37,9 @@ public class Usuario {
     @Getter @Setter @Column(name = "telefono")
     private String telefono;
 
+    @Getter @Setter @Column(name = "direccion")
+    private String direccion;
+
     @Getter @Setter @Column(name = "password")
     private String password;
 

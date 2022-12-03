@@ -3,17 +3,23 @@ package com.utp.spring.controllers;
 import com.utp.spring.services.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 @Controller
@@ -36,7 +42,9 @@ public class ContactoController {
 
 
     @PostMapping("/contacto")
-    public String submitContact(HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+    public String submitContact(HttpServletRequest request,@RequestParam("attachment") MultipartFile multipartFile) throws MessagingException, UnsupportedEncodingException {
+
+
         String fullname = request.getParameter("fullname");
         String email = request.getParameter("email");
         String subject = request.getParameter("subject");
@@ -55,14 +63,25 @@ public class ContactoController {
 
 
         helper.setFrom("bonihd48@gmail.com", "Probando el java-meil");
-        helper.setTo("jorgebonifazcampos4848@gmail.com");
+        helper.setTo("jackaymar1226@gmail.com");
 
         helper.setSubject(mailSubject);
         helper.setText(mailContent, true);
 
+        if(!multipartFile.isEmpty()){
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+
+            InputStreamSource source = new InputStreamSource() {
+                @Override
+                public InputStream getInputStream() throws IOException {
+                    return multipartFile.getInputStream();
+                }
+            };
+            helper.addAttachment(fileName, source);
+        }
 
         mailSender.send(message);
 
-        return "message";
+        return "redirect:/inicio";
     }
 }
