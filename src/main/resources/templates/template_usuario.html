@@ -22,6 +22,7 @@
                     <li><a th:href="@{/inicio}">Inicio <br> <img src="img/inicio.png" alt=""></a></li>
                     <li><a th:href="@{/nosotros}">Nosotros <br> <img src="img/nosotros.png" alt=""></a></li>
                     <li><a th:href="@{/categorias}">Productos <br> <img src="img/cup.png" alt=""></a></li>
+                    <li><a th:href="@{/contacto}">Contacto <br> <img src="img/atencion-al-cliente.png" alt=""></a></li>
                     <li><a><img src="img/agregar-usuario.png"><h4 class="user" th:text="${usuario.nombre}"></h4></a>
                         <ul class="desl">
                             <li sec:authorize="isAuthenticated()"><a class="desl_3" th:href="@{/logout}">Cerrar sesion</a></li>
