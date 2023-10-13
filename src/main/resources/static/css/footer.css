@@ -1,38 +1,43 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
 
-footer{
-    background: rgb(28, 52, 132);
-    border: solid 1px #ccc;
-    color: rgb(243, 234, 234);
-    display: flex;
-    margin-bottom: auto;
-    margin-top: 125.4px;
+footer {
+    background: rgb(137, 15, 13);
+    color: #f3eaea;
     text-align: center;
-    align-items: center;
+    padding: 15px;
 }
-.redes{
-    display: flex;
+
+.redes {
     list-style: none;
-    padding-right: 25%;
-    text-align: center ;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
-    .redes{
-        list-style: none;
 
-    }
+.redes li {
+    margin: 0 10px;
+}
 
-    .redes li {
-        margin-left: 100px ;
-        margin-right: 100px;
-        text-align: center;
-    }
+.redes a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
 
-    .telefono {
-        margin-left: 500px  ;
-    }
+.redes a:hover {
+    background-color: #f3eaea;
+}
 
-    .redes img{
-        width: 30px;
-        height: 30px;
-        padding: 10px;
-    }
+.redes img {
+    width: 20px;
+    height: 20px;
+}

@@ -1,32 +1,33 @@
-
-.nosotros{
+.info {
     margin-top: 10%;
     display: flex;
     justify-content: center;
     border-radius: 20px;
+    margin-bottom: 73px;
 }
 
-.nosotros ul li{
+.nosotros ul li {
     display: inline-block;
     align-items: center;
-    background: rgb(216, 38, 26);
-    border: solid 1px #D9CE3F;
+    background: #f2f2f2;
+    border: solid 1px #ccc;
     padding: 1em;
     border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-h1{
+
+h1 {
     text-align: center;
-    color: #D9CE3F;
+    color: #333;
 }
-.nosotros p{
-    background-color: #EEEEEE;
+
+.nosotros p {
     height: 2.8cm;
     width: 15cm;
     padding: 1.5em;
     text-align: justify;
-}
-
-p {
     border-radius: 20px;
-    border: solid 2px rgb(28, 52, 132);
+    border: solid 2px #1c3484;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

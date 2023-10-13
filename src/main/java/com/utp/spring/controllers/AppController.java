@@ -43,6 +43,10 @@ public class AppController {
     @GetMapping("/nosotros")
     public String verNosotros(Model modelo,HttpSession session){
 
+        if(session.getAttribute("idusuario")!=null){
+            modelo.addAttribute(usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get());
+        }
+
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
         return "nosotros";
     }
