@@ -56,7 +56,9 @@
             <div class="container">
                 <input type="checkbox" id="btn-mas">
                 <div class="carrito">
-                    <a href="listaproductos/?format=pdf" title="Exportar en PDF" target="_blank"><img src="../img/pdf.png" alt="" ></a>
+                    <form action="/generarReporte" method="post">
+                        <a href="" title="Exportar en PDF" target="_blank"><button type="submit"><img src="../img/pdf.png" alt="" ></button></a>
+                    </form>
                     <a href="listaproductos/?format=xls" title="Exportar en Excel"><img src="../img/excel.png" alt="" ></a>
                 </div>
             </div>

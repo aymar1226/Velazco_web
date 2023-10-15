@@ -35,7 +35,6 @@ public class UsuarioServiceImpl implements IUsuarioService{
 
     }
 
-
     @Override
     public Optional<Usuario> findByEmail(String correo) {
         return usuarioDAO.findByEmail(correo);
