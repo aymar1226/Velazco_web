@@ -5,8 +5,6 @@ import com.utp.spring.models.entity.Categoria;
 import com.utp.spring.models.entity.Producto;
 import com.utp.spring.models.entity.Usuario;
 import com.utp.spring.services.*;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -198,31 +194,6 @@ public class ProductoController {
 
         productoService.delete(id);
         return "redirect:/listaproductos";
-    }
-    @PostMapping("/generarReporte")
-    public String generarReporte() throws Exception {
-        // Lógica para generar el reporte utilizando JasperReports
-
-        // Ruta al archivo .jrxml
-        String rutaJrxml = "C:/Users/JACK/Desktop/spring boot/Velazco 2.0/Reportes/reporte_productos.jrxml";
-
-        // Configurar los parámetros del reporte, si es necesario
-        Map<String, Object> parametros = new HashMap<>();
-
-        // Lógica para cargar la lista de productos, si es necesario
-        List<Producto> listaProductos = productoService.findAll();
-
-        // Lógica para generar el reporte utilizando JasperReports
-        JasperReport reporte = JasperCompileManager.compileReport(rutaJrxml);
-        JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, parametros, new JRBeanCollectionDataSource(listaProductos));
-
-        // Ruta donde se guardará el archivo generado
-        String rutaReporte = "C:/Users/JACK/Desktop/Reportes/reporte_productos.pdf";
-
-        // Exportar el reporte en formato PDF y guardarlo en la ruta especificada
-        JasperExportManager.exportReportToPdfFile(jasperPrint, rutaReporte);
-
-        return "redirect:/listaproductos"; // Redirigir a la página de lista de productos después de generar el reporte
     }
 
 }
