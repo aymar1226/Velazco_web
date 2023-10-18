@@ -1,5 +1,6 @@
 package com.utp.spring.services;
 
+import com.utp.spring.models.entity.Rol;
 import com.utp.spring.models.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
@@ -17,6 +18,8 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
     private IUsuarioService usuarioService;
+    @Autowired
+    private IRolService rolService;
 
     @Autowired
     private BCryptPasswordEncoder bcrypt;
@@ -30,9 +33,15 @@ public class UserDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Usuario> optionalUser=usuarioService.findByEmail(username);
         if(optionalUser.isPresent()){
+
             session.setAttribute("idusuario",optionalUser.get().getIdusuario());
             Usuario usuario= optionalUser.get();
-            return User.builder().username(usuario.getNombre()).password(usuario.getPassword()).roles(usuario.getRol()).build();
+            Optional<Rol> rol = rolService.findbyId(usuario.getRol().getIdRol());
+
+            if ( rol== null) {
+                throw new UsernameNotFoundException("Rol no encontrado para el usuario");
+            }
+            return User.builder().username(usuario.getCorreo()).password(usuario.getPassword()).roles(usuario.getRol().getNombre()).build();
         }else {
             throw new UsernameNotFoundException("Usuario no encontrado");
         }

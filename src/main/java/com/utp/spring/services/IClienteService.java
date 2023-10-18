@@ -9,4 +9,6 @@ public interface IClienteService {
     public Cliente save(Cliente cliente);
     public Cliente findbyId(Long id);
     public void delete(Cliente cliente);
-}
+    Boolean existsByDNI(String dni);
+
+    }

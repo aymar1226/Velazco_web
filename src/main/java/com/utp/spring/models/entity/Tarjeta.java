@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class Tarjeta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID",nullable = false)
     private Integer id;
 
     private String titular;

@@ -44,9 +44,9 @@ public class ProductoServiceImpl implements IProductoService {
         IProductoDAO.save(producto);
     }
 
-    public List<Producto> listAll(String palabraClave){
-        if(palabraClave !=null){
-            return IProductoDAO.findAll(palabraClave);
+    public List<Producto> listAll(Long categoriaID){
+        if(categoriaID !=null){
+            return IProductoDAO.findAll(categoriaID);
         }
         return IProductoDAO.findAll();
     }

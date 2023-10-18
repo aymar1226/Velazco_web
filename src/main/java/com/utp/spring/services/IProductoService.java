@@ -13,7 +13,7 @@ public interface IProductoService {
     public Optional<Producto> get(Long id);
     public void update(Producto producto);
 
-    public List<Producto> listAll(String palabraClave);
+    public List<Producto> listAll(Long categoriaID);
 
 
 

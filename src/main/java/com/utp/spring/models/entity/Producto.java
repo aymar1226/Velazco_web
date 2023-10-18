@@ -11,7 +11,7 @@ public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idproducto", nullable = false)
+    @Column(name = "ID", nullable = false)
     private Long idproducto;
 
     @Column(name = "nombre")
@@ -30,7 +30,7 @@ public class Producto {
     private String imagen;
 
     @ManyToOne
-    @JoinColumn(name = "idcategoria")
+    @JoinColumn(name = "categoriaID")
     private Categoria categoria;
 
     public Long getIdproducto() {

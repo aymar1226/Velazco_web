@@ -16,47 +16,84 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter @Setter @Column(name = "idusuario", nullable = false)
+    @Column(name = "ID", nullable = false)
     private Long idusuario;
 
-    @Getter @Setter @Column(name = "rol")
-    private String rol;
-
-    @Getter @Setter @Column(name = "nombre")
-    private String nombre;
-
-    @Getter @Setter @Column(name = "apellido")
-    private String apellido;
-
-    @Getter @Setter @Column(name = "dni")
-    private String dni;
-
-    @Getter @Setter @Column(name = "correo")
+    @Column(name = "correo")
     private String correo;
 
-    @Getter @Setter @Column(name = "telefono")
-    private String telefono;
-
-    @Getter @Setter @Column(name = "direccion")
-    private String direccion;
-
-    @Getter @Setter @Column(name = "password")
+    @Column(name = "contraseña")
     private String password;
 
     @OneToMany(mappedBy = "usuario")
     private List<Orden> ordenes;
 
+    @OneToOne(mappedBy = "usuario")
+    private Cliente cliente;
+
+    @OneToOne(mappedBy = "usuario")
+    private Empleado empleado;
+
+    @ManyToOne
+    @JoinColumn(name = "rolID")
+    private Rol rol;
+
     public Usuario() {
     }
 
-    public Usuario(Long idusuario, String rol, String nombre, String apellido, String dni, String correo, String telefono, String password) {
+    public Long getIdusuario() {
+        return idusuario;
+    }
+
+    public void setIdusuario(Long idusuario) {
         this.idusuario = idusuario;
-        this.rol = rol;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
         this.correo = correo;
-        this.telefono = telefono;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Orden> getOrdenes() {
+        return ordenes;
+    }
+
+    public void setOrdenes(List<Orden> ordenes) {
+        this.ordenes = ordenes;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
 }

@@ -13,6 +13,7 @@ public interface IUsuarioService {
     Usuario save(Usuario usuario);
     void delete(Usuario usuario);
     Optional<Usuario> findByEmail(String correo);
+    String obtenerRolPorId(Long usuarioId);
 
 
-}
+    }

@@ -1,8 +1,8 @@
 package com.utp.spring.controllers;
 
-import com.utp.spring.models.entity.Categoria;
-import com.utp.spring.models.entity.Producto;
-import com.utp.spring.models.entity.Usuario;
+import com.utp.spring.models.entity.*;
+import com.utp.spring.services.IClienteService;
+import com.utp.spring.services.IRolService;
 import com.utp.spring.services.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import javax.servlet.http.HttpSession;
@@ -24,6 +25,12 @@ public class UsuarioController {
     @Autowired
     private IUsuarioService usuarioService;
 
+    @Autowired
+    private IRolService rolService;
+
+    @Autowired
+    private IClienteService clienteService;
+
 
     BCryptPasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
 
@@ -31,7 +38,7 @@ public class UsuarioController {
     public String listarUsuarios(Model modelo){
         List<Usuario> listaUsuarios = usuarioService.findAll();
         modelo.addAttribute("listaUsuarios", listaUsuarios);
-        return "table_usuario";
+        return "crud_usuarios";
     }
 
     @GetMapping("/registro")
@@ -40,10 +47,28 @@ public class UsuarioController {
     }
 
     @PostMapping("/guardar")
-    public String guardarUsuario(Usuario usuario){
-        usuario.setRol("USER");
-        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-        usuarioService.save(usuario);
+    public String guardarUsuario(Usuario usuario,Cliente cliente,Model model){
+
+        Rol rol = rolService.findbyId(2L).orElse(null);
+        if(clienteService.existsByDNI(cliente.getDni())){
+            model.addAttribute("error", "El DNI ya está registrado.");
+            return "registro_usuario";
+        }else if (rol!=null){
+            usuario.setRol(rol);
+            usuario.setPassword (passwordEncoder.encode(usuario.getPassword()));
+            Usuario nuevoUsuario= usuarioService.save(usuario);
+
+            System.out.println(" "+usuario);
+
+            if(nuevoUsuario!=null){
+                if(cliente!=null){
+                    cliente.setUsuario(nuevoUsuario);
+                    clienteService.save(cliente);
+                }
+            }
+        }
+        System.out.println(" "+cliente);
+
 
     return "redirect:/";
     }
@@ -54,11 +79,11 @@ public class UsuarioController {
     }
 
     @GetMapping("/acceder")
-    public String acceder (Usuario usuario, HttpSession session){
+    public String acceder (Usuario usuario,Cliente cliente, HttpSession session){
         Optional<Usuario> user=usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString()));
         if (user.isPresent()){
             session.setAttribute("idusuario",user.get().getIdusuario());
-            session.setAttribute("rolusuario",user.get().getRol());
+            session.setAttribute("rolusuario",user.get().getRol().getNombre());
             return "redirect:/inicio";
         }else{
             return "redirect:/";
@@ -72,5 +97,49 @@ public class UsuarioController {
         return "redirect:/";
     }
 
+    @GetMapping("editar/{id}")
+    public String edit(@PathVariable Long id, Model modelo){
+
+        Optional<Usuario> optionalUsuario=usuarioService.findbyId(id);
+        Usuario usuario=optionalUsuario.get();
+        Cliente cliente = usuario.getCliente();
+
+        modelo.addAttribute("cliente",cliente);
+        modelo.addAttribute("usuario",usuario);
+
+        return "perfil";
+    }
+
+    @PostMapping("/update")
+    public String update(Long id,Usuario usuario,Cliente cliente) throws IOException {
+
+        cliente = usuario.getCliente();
+        cliente.setUsuario(usuario.getIdusuario());
+
+        clienteService.save(cliente);
+        usuarioService.save(usuario);
+
+
+        return "redirect:/usuario/editar/" + id;
+    }
+
+    @PostMapping("/cambiar_contraseña")
+    public String cambiarContraseña(@RequestParam Long id,String rawPassword,Model model,String newPassword,Model modelo){
+        Usuario usuario = new Usuario();
+        Optional<Usuario> optionalUsuario = usuarioService.findbyId(id);
+        usuario = optionalUsuario.get();
+
+        boolean passwordMatch = passwordEncoder.matches(rawPassword,usuario.getPassword());
+        if(passwordMatch){
+            usuario.setPassword(passwordEncoder.encode(newPassword));
+            model.addAttribute("activeTab", "password-tab");
+            model.addAttribute("message", "Contraseña cambiada correctamente");
+            usuarioService.save(usuario);
+        }else{
+            model.addAttribute("message", "Contraseña actual incorrecta");
+        }
+
+        return "redirect:/usuario/editar/" + id;
+    }
 
 }

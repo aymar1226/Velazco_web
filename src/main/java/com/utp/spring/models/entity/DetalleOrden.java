@@ -3,7 +3,7 @@ package com.utp.spring.models.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "detalles")
+@Table(name = "ordenes_detalles")
 public class DetalleOrden {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -12,7 +12,7 @@ import java.util.List;
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idcategoria", nullable = false)
+    @Column(name = "ID", nullable = false)
     private Long idcategoria;
 
     private String nombre;

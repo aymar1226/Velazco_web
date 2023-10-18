@@ -59,8 +59,8 @@ public class ProductoController {
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
 
         //FILTRO
-        String palabraClave = ("1");
-        List<Producto> listaProductos = productoService.listAll(palabraClave);
+        Long categoriaID = 1l;
+        List<Producto> listaProductos = productoService.listAll(categoriaID);
         modelo.addAttribute("listaProductos", listaProductos);
         return "categoria/bizcochos";
     }
@@ -76,8 +76,8 @@ public class ProductoController {
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
 
         //FILTRO
-        String palabraClave = ("2");
-        List<Producto> listaProductos = productoService.listAll(palabraClave);
+        Long categoriaID = 2l;
+        List<Producto> listaProductos = productoService.listAll(categoriaID);
         modelo.addAttribute("listaProductos", listaProductos);
         return "categoria/galletas";
     }
@@ -93,8 +93,8 @@ public class ProductoController {
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
 
         //FILTRO
-        String palabraClave = ( "3");
-        List<Producto> listaProductos = productoService.listAll(palabraClave);
+        Long categoriaID = 3l;
+        List<Producto> listaProductos = productoService.listAll(categoriaID);
         modelo.addAttribute("listaProductos", listaProductos);
         return "categoria/pasteles";
     }
@@ -110,8 +110,8 @@ public class ProductoController {
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
 
         //FILTRO
-        String palabraClave = ( "4");
-        List<Producto> listaProductos = productoService.listAll(palabraClave);
+        Long categoriaID = 4l;
+        List<Producto> listaProductos = productoService.listAll(categoriaID);
         modelo.addAttribute("listaProductos", listaProductos);
         return "categoria/dulces";
     }
@@ -161,6 +161,7 @@ public class ProductoController {
         modelo.addAttribute("listaCategorias",listaCategorias);
         return "producto_formulario";
     }
+
     @PostMapping("/productos/update")
     public String update(Producto producto,@RequestParam("img") MultipartFile file) throws IOException {
         Producto p=new Producto();

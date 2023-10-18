@@ -33,4 +33,12 @@ public class ClienteServiceImpl implements IClienteService {
     public void delete(Cliente cliente) {
         clienteDAO.delete(cliente);
     }
+
+    @Override
+    public Boolean existsByDNI(String dni) {
+
+        return clienteDAO.countByDNI(dni)>0;
+    }
+
+
 }

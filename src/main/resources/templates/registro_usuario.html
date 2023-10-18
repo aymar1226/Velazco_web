@@ -17,13 +17,15 @@
             <input class="controls" type="text" name="telefono" id="Telefono" placeholder="Ingrese su Telefono">
             <!--<input class="controls" type="text" name="rol" id="rol" placeholder="Ingrese su rol">-->
             <input class="controls" type="email" name="correo" id="Correo" placeholder="Ingrese su Correo" required>
-            <input class="controls" type="text" name="direccion" id="Direccion" placeholder="Ingrese su Direccion" required>
             <input class="controls" type="password" name="password" id="Password" placeholder="Ingrese su Contraseña"required>
             <input class="controls" type="password" name="pass" id="RepetirPassword" placeholder="Repetir Contraseña">
             <label class="container">Estoy de acuerdo con los Términos y Condiciones
                 <input type="checkbox" checked="checked">
                 <span class="checkmark"></span>
               </label>
+            <div th:if="${error}" class="error-message">
+                <p th:text="${error}" class="alert alert-danger"></p>
+            </div>
             <a th:href="@{/}">Ya estas registrado? Inicia sesión</a>
 
             <button class="botons">Registrar</button>

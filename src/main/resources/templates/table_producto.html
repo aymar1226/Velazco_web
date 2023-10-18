@@ -23,8 +23,6 @@
 </header>
 <body>
 	<div id="main-container">
-
-
 		<table id="productos">
 			<thead>
 				<tr>
@@ -37,19 +35,18 @@
                 </tr>
 			</thead>
             <tbody>
-            <tr th:each="producto : ${listaProductos}">
-                <td th:text="${producto.idproducto}"></td>
-                <td th:text="${producto.categoria.nombre}"></td>
-                <td th:text="${producto.nombre}"></td>
-                <td th:text="${producto.descripcion}"></td>
-                <td th:text="${producto.precio}"></td>
-                <td>
-                    <a th:href="@{'/productos/editar'+'/'+${producto.idproducto}}" class="btn btn-info">Editar</a>
-                    &nbsp;&nbsp;
-                    <a th:href="@{'/productos/eliminar'+'/'+${producto.idproducto}}" class="btn btn-danger">Eliminar</a>
-                </td>
-
-            <tr/>
+                <tr th:each="producto : ${listaProductos}">
+                    <td th:text="${producto.idproducto}"></td>
+                    <td th:text="${producto.categoria.nombre}"></td>
+                    <td th:text="${producto.nombre}"></td>
+                    <td th:text="${producto.descripcion}"></td>
+                    <td th:text="${producto.precio}"></td>
+                    <td>
+                        <a th:href="@{'/productos/editar'+'/'+${producto.idproducto}}" class="btn btn-info">Editar</a>
+                        &nbsp;&nbsp;
+                        <a th:href="@{'/productos/eliminar'+'/'+${producto.idproducto}}" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
             </tbody>
 		</table>
         <div th:fragment="carrito">

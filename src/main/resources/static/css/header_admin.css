@@ -1,0 +1,23 @@
+body{
+ background: url(../img/fondo.jpg);
+}
+
+.text-light:hover{
+    color: rgb(152, 12, 12) !important;
+}
+
+.active{
+    color: #fff !important;
+    background-color: #390D02 !important;
+}
+
+.bg-micolor {
+  background-color: #da251c; /* Cambia el color al que desees */
+  color: #fff; /* Cambia el color del texto si es necesario */
+}
+
+.bg-micolor2 {
+  background-color: #390D02; /* Cambia el color al que desees */
+  color: #fff; /* Cambia el color del texto si es necesario */
+}
+

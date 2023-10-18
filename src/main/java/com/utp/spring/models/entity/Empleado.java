@@ -6,15 +6,16 @@ import lombok.ToString;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "clientes")
+@Table(name = "empleados")
 @ToString
 @EqualsAndHashCode
-public class Cliente {
+public class Empleado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID",nullable = false)
-    private Long id;
+    @Column(name = "ID", nullable = false)
+    private Long idEmpleado;
+
     private String nombre;
     private String apellido;
     private String telefono;
@@ -24,12 +25,16 @@ public class Cliente {
     @JoinColumn(name = "usuarioID")
     private Usuario usuario;
 
-    public Long getId() {
-        return id;
+    @ManyToOne
+    @JoinColumn(name = "cargoID")
+    private Cargo cargo;
+
+    public Long getIdEmpleado() {
+        return idEmpleado;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdEmpleado(Long idEmpleado) {
+        this.idEmpleado = idEmpleado;
     }
 
     public String getNombre() {
@@ -70,5 +75,13 @@ public class Cliente {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
     }
 }
