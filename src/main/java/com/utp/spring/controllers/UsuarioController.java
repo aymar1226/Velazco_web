@@ -106,25 +106,38 @@ public class UsuarioController {
 
         modelo.addAttribute("cliente",cliente);
         modelo.addAttribute("usuario",usuario);
-
         return "perfil";
     }
 
     @PostMapping("/update")
-    public String update(Long id,Usuario usuario,Cliente cliente) throws IOException {
+    public String update(Long id,Usuario usuario) throws IOException {
 
-        cliente = usuario.getCliente();
-        cliente.setUsuario(usuario.getIdusuario());
+        Cliente clienteExistente = new Cliente();
+        Usuario usuarioExistente = new Usuario();
+        Optional<Usuario> optionalUsuario = usuarioService.findbyId(usuario.getIdusuario());
+        usuarioExistente = optionalUsuario.get();
 
-        clienteService.save(cliente);
-        usuarioService.save(usuario);
+        Cliente cliente = usuario.getCliente();
+
+        clienteExistente= clienteService.findbyId(cliente.getId());
+        clienteExistente.setNombre(cliente.getNombre());
+        clienteExistente.setApellido(cliente.getApellido());
+        clienteExistente.setTelefono(cliente.getTelefono());
+        clienteExistente.setDni(cliente.getDni());
 
 
-        return "redirect:/usuario/editar/" + id;
+
+        usuarioExistente.setCorreo(usuario.getCorreo());
+
+        clienteService.save(clienteExistente);
+        usuarioService.save(usuarioExistente);
+
+
+        return "redirect:/usuario/editar/" + usuario.getIdusuario();
     }
 
     @PostMapping("/cambiar_contraseña")
-    public String cambiarContraseña(@RequestParam Long id,String rawPassword,Model model,String newPassword,Model modelo){
+    public String cambiarContraseña(@RequestParam Long id,String rawPassword,Model model,String newPassword,RedirectAttributes redirectAttributes){
         Usuario usuario = new Usuario();
         Optional<Usuario> optionalUsuario = usuarioService.findbyId(id);
         usuario = optionalUsuario.get();
@@ -133,7 +146,7 @@ public class UsuarioController {
         if(passwordMatch){
             usuario.setPassword(passwordEncoder.encode(newPassword));
             model.addAttribute("activeTab", "password-tab");
-            model.addAttribute("message", "Contraseña cambiada correctamente");
+            redirectAttributes.addFlashAttribute("message", "Contraseña cambiada correctamente");
             usuarioService.save(usuario);
         }else{
             model.addAttribute("message", "Contraseña actual incorrecta");
