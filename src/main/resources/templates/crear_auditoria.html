@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/auditoria.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+
+
+</head>
+<body>
+
+<div class="container">
+
+    <form th:action="@{/pagartarjeta}" method="post">
+
+        <div class="row">
+
+            <div class="col">
+
+                <h3 class="title">Crear Auditoria</h3>
+
+                <div class="inputBox">
+                    <span>Nombre de Evento :</span>
+                    <input type="email" name="correo">
+                </div>
+                <div class="inputBox">
+                    <span>Fecha inicio :</span>
+                    <input type="date" name="direccion">
+                </div>
+                <div class="inputBox">
+                    <span>Fecha fin :</span>
+                    <input type="date" name="direccion">
+                </div>
+                <div class="inputBox">
+                    <span>Observacion :</span>
+                    <textarea type="text" class="form-control" id="descripcion" name="descripcion"
+                    placeholder="" autocomplete="off" required></textarea>
+                </div>
+            </div>
+    
+        </div>
+
+        <button type="submit" value="Procesar el pago" class="submit-btn">Crear</button>
+
+    </form>
+
+</div>    
+    
+</body>
+</html>
