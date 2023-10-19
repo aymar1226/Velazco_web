@@ -44,7 +44,7 @@ public class ProductoController {
     public String listarProductos(Model modelo){
         List<Producto> listaProductos = productoService.findAll();
         modelo.addAttribute("listaProductos", listaProductos);
-        return "table_producto";
+        return "crud_productos";
     }
 
 

@@ -36,9 +36,9 @@
               <h5 class="card-title">
                 DATOS ORDEN
               </h5>
-              <h6 th:text="'Nombre: '+${usuario.nombre}">nombre</h6>
+              <h6 th:text="'Nombre: '+${usuario.cliente.nombre}">nombre</h6>
               <h6 th:text="'Correo: '+${usuario.correo}">email</h6>
-              <h6 th:text="'Dni: '+${usuario.dni}">direccion</h6>
+              <h6 th:text="'Dni: '+${usuario.cliente.dni}">direccion</h6>
 
               <h5 class="card-title">
                 PRODUCTOS
@@ -51,6 +51,7 @@
                       <th scope="col">Precio</th>
                       <th scope="col">Cantidad</th>
                       <th scope="col">Total</th>
+                    </tr>
                     </tr>
                   </thead>
                   <tbody>
@@ -74,7 +75,7 @@
 
           <ul class="list-group">
             <li class="list-group-item"><h5 th:text=" 'Total: '+ ${orden.total}"></h5></li>
-              <button type="submit" class="botons"><a th:href="@{/guardarOrden}" class="orden">Generar</a></button>
+             <a th:href="@{/guardarOrden}" class="orden"> <button type="submit" class="botons">Generar</button></a>
           </ul>
         </div>
       </div>

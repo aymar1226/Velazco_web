@@ -11,14 +11,16 @@ public class Orden {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String numero;
-	private Date fechaCreacion;
-	private Date fechaRecibida;
+	private Date fecha_creacion;
+	private Date fecha_recibida;
 
 	private double total;
 	
 	@ManyToOne
-	@JoinColumn(name = "idusuario")
+	@JoinColumn(name = "usuarioID")
 	private Usuario usuario;
+
+
 	
 	@OneToMany(mappedBy = "orden")
 	private List<DetalleOrden> detalle;
@@ -31,8 +33,8 @@ public class Orden {
 		super();
 		this.id = id;
 		this.numero = numero;
-		this.fechaCreacion = fechaCreacion;
-		this.fechaRecibida = fechaRecibida;
+		this.fecha_creacion = fechaCreacion;
+		this.fecha_recibida = fechaRecibida;
 		this.total = total;
 	}
 
@@ -53,19 +55,19 @@ public class Orden {
 	}
 
 	public Date getFechaCreacion() {
-		return fechaCreacion;
+		return fecha_creacion;
 	}
 
 	public void setFechaCreacion(Date fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
+		this.fecha_creacion = fechaCreacion;
 	}
 
 	public Date getFechaRecibida() {
-		return fechaRecibida;
+		return fecha_recibida;
 	}
 
 	public void setFechaRecibida(Date fechaRecibida) {
-		this.fechaRecibida = fechaRecibida;
+		this.fecha_recibida = fechaRecibida;
 	}
 
 	public double getTotal() {
@@ -96,8 +98,8 @@ public class Orden {
 
 	@Override
 	public String toString() {
-		return "Orden [id=" + id + ", numero=" + numero + ", fechaCreacion=" + fechaCreacion + ", fechaRecibida="
-				+ fechaRecibida + ", total=" + total + "]";
+		return "Orden [id=" + id + ", numero=" + numero + ", fechaCreacion=" + fecha_creacion + ", fechaRecibida="
+				+ fecha_recibida + ", total=" + total + "]";
 	}
 	
 

@@ -33,8 +33,9 @@ public class TarjetaController {
 
         tarjeta.setUsuario(usuario);
         tarjeta.setCvv(passwordEncoder.encode(tarjeta.getCvv()));
+
         tarjetaService.save(tarjeta);
-        return "redirect:/";
+        return "redirect:/inicio";
     }
 
 }

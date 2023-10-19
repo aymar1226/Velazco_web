@@ -10,12 +10,14 @@ body{
 
 .opciones2 ul{
     display:flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     list-style: none;
-    margin-top: 15em;
-    margin-left: 25em;
+    margin-top: 10em;
+    margin-left: 15em;
+    margin-right: 15em;
+
     background-color: rgb(241, 205, 147);
-    padding: 40px 45px 40px 0px;
+    padding: 40px 0px 40px 0px;
     border-radius: 50px;
     box-shadow: 7px 13px 37px #000;
     border: 5px solid #890F0D;

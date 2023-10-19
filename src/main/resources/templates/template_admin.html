@@ -25,7 +25,8 @@
                     <li><a th:href="@{/contacto}">Contacto <br> <img src="img/atencion-al-cliente.png" alt=""></a></li>
                     <li><a><img th:src="@{/img/admin.png}" alt=""><h4 class="user" th:text="${usuario.cliente.nombre}"></h4></a>
                         <ul class="desl">
-                            <li><a class="desl_2" th:href="@{/admin}">Administrar</a></li>
+                            <li><a class="desl_1" th:href="@{/admin}">Administrar</a></li>
+                            <li sec:authorize="isAuthenticated()"><a class="desl_2" th:if="${usuario != null}" th:href="@{'/usuario/editar'+'/'+${usuario.idusuario}}">Perfil</a></li>
                             <li sec:authorize="isAuthenticated()"><a class="desl_3" th:href="@{/logout}">Cerrar sesion</a></li>
                         </ul>
                     </li>

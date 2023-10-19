@@ -149,7 +149,7 @@ public class UsuarioController {
             redirectAttributes.addFlashAttribute("message", "Contraseña cambiada correctamente");
             usuarioService.save(usuario);
         }else{
-            model.addAttribute("message", "Contraseña actual incorrecta");
+            redirectAttributes.addFlashAttribute("error", "Contraseña actual incorrecta");
         }
 
         return "redirect:/usuario/editar/" + id;
