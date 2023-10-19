@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/auditoria.css">
+    <link rel="stylesheet" th:href="@{/css/auditoria.css}">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
 
 
@@ -14,7 +14,7 @@
 
 <div class="container">
 
-    <form th:action="@{/pagartarjeta}" method="post">
+    <form th:action="@{/auditoria/guardar}" method="post">
 
         <div class="row">
 
@@ -24,20 +24,16 @@
 
                 <div class="inputBox">
                     <span>Nombre de Evento :</span>
-                    <input type="email" name="correo">
+                    <input type="text" name="evento">
                 </div>
                 <div class="inputBox">
-                    <span>Fecha inicio :</span>
-                    <input type="date" name="direccion">
-                </div>
-                <div class="inputBox">
-                    <span>Fecha fin :</span>
-                    <input type="date" name="direccion">
-                </div>
-                <div class="inputBox">
-                    <span>Observacion :</span>
+                    <span>Descripción :</span>
                     <textarea type="text" class="form-control" id="descripcion" name="descripcion"
-                    placeholder="" autocomplete="off" required></textarea>
+                              placeholder="" autocomplete="off" required></textarea>
+                </div>
+                <div class="inputBox">
+                    <span>Fecha de inicio :</span>
+                    <input type="date" name="fecha_inicio">
                 </div>
             </div>
     

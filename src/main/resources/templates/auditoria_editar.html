@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/auditoria.css}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+
+
+</head>
+<body>
+
+<div class="container">
+
+    <form th:action="@{/auditoria/update}" th:object="${auditoria}" method="post">
+        <input type="hidden" th:field="*{idAuditoria}" th:value="${auditoria.idAuditoria}"/>
+
+        <div class="row">
+
+            <div class="col">
+
+                <h3 class="title">Modificar Auditoria</h3>
+
+                <div class="inputBox">
+                    <span>Nombre de Evento :</span>
+                    <input type="text" name="evento" th:field="*{evento}">
+                </div>
+                <div class="inputBox">
+                    <span>Descripción :</span>
+                    <textarea type="text" class="form-control" id="descripcion" name="descripcion"
+                              placeholder="" autocomplete="off" th:field="*{descripcion}" required></textarea>
+                </div>
+                <div class="inputBox">
+                    <span>Fecha de inicio :</span>
+                    <input type="date" name="fecha_inicio" th:field="*{fecha_inicio}">
+                </div>
+                <div class="inputBox">
+                    <span>Fecha de finalización :</span>
+                    <input type="date" name="direccion" th:field="*{fecha_fin}">
+                </div>
+                <div class="inputBox">
+                    <span>Estado :</span>
+                    <select th:field="*{estado}">
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="Finalizado">Finalizado</option>
+                    </select>
+                </div>
+            </div>
+    
+        </div>
+
+        <button type="submit" value="Modificar auditoria" class="submit-btn">Guardar</button>
+
+    </form>
+
+</div>    
+    
+</body>
+</html>
