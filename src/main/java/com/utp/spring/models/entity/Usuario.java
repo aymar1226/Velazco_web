@@ -18,19 +18,14 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Long idusuario;
-
     @Column(name = "correo")
     private String correo;
-
     @Column(name = "contraseña")
     private String password;
-
     @OneToMany(mappedBy = "usuario")
     private List<Orden> ordenes;
-
     @OneToOne(mappedBy = "usuario")
     private Cliente cliente;
-
     @OneToOne(mappedBy = "usuario")
     private Empleado empleado;
 

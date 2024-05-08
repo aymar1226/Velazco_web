@@ -11,13 +11,14 @@ public class DetalleOrden {
 	private String descripcion;
 	private double cantidad;
 	private double precio_venta;
-	private double total;
+	private double valor_venta;
 	
 	@ManyToOne
+	@JoinColumn(name = "ordenID")
 	private Orden orden;
 	
 	@ManyToOne
-	@JoinColumn(name = "idproducto")
+	@JoinColumn(name = "productoID")
 	private Producto producto;
 	
 	public DetalleOrden() {
@@ -29,7 +30,7 @@ public class DetalleOrden {
 		this.descripcion = nombre;
 		this.cantidad = cantidad;
 		this.precio_venta = precio;
-		this.total = total;
+		this.valor_venta = total;
 	}
 	public Integer getId() {
 		return id;
@@ -56,10 +57,10 @@ public class DetalleOrden {
 		this.precio_venta = precio;
 	}
 	public double getTotal() {
-		return total;
+		return valor_venta;
 	}
 	public void setTotal(double total) {
-		this.total = total;
+		this.valor_venta = total;
 	}
 	
 	
@@ -78,7 +79,7 @@ public class DetalleOrden {
 	@Override
 	public String toString() {
 		return "DetalleOrden [id=" + id + ", nombre=" + descripcion + ", cantidad=" + cantidad + ", precio=" + precio_venta
-				+ ", total=" + total + "]";
+				+ ", total=" + valor_venta + "]";
 	}
 
 }

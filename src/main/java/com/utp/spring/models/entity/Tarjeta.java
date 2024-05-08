@@ -9,20 +9,14 @@ public class Tarjeta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID",nullable = false)
     private Integer id;
-
     private String titular;
     private String ciudad;
-
     private String nro_tarjeta;
-
     private String mes_exp;
-
     private String año_exp;
-
     private String cvv;
-
     @ManyToOne
-    @JoinColumn(name = "idusuario")
+    @JoinColumn(name = "usuarioID")
     private Usuario usuario;
 
     public Tarjeta() {

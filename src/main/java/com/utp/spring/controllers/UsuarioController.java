@@ -24,14 +24,10 @@ public class UsuarioController {
 
     @Autowired
     private IUsuarioService usuarioService;
-
     @Autowired
     private IRolService rolService;
-
     @Autowired
     private IClienteService clienteService;
-
-
     BCryptPasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
 
     @GetMapping("/listausuarios")
@@ -47,12 +43,20 @@ public class UsuarioController {
     }
 
     @PostMapping("/guardar")
-    public String guardarUsuario(Usuario usuario,Cliente cliente,Model model){
+    public String guardarUsuario(Usuario usuario,Cliente cliente,Model model,@RequestParam ("pass")String repetirPassword){
 
         Rol rol = rolService.findbyId(2L).orElse(null);
+        Optional<Usuario> optionalUser=usuarioService.findByEmail(usuario.getCorreo());
         if(clienteService.existsByDNI(cliente.getDni())){
             model.addAttribute("error", "El DNI ya está registrado.");
             return "registro_usuario";
+        }else if(optionalUser.isPresent()){
+            model.addAttribute("error", "El correo ya está registrado.");
+            return "registro_usuario";
+        }else if(!usuario.getPassword().equals(repetirPassword)){
+            model.addAttribute("error", "Las contraseñas no coinciden.");
+            return "registro_usuario";
+
         }else if (rol!=null){
             usuario.setRol(rol);
             usuario.setPassword (passwordEncoder.encode(usuario.getPassword()));
@@ -125,19 +129,17 @@ public class UsuarioController {
         clienteExistente.setTelefono(cliente.getTelefono());
         clienteExistente.setDni(cliente.getDni());
 
-
-
         usuarioExistente.setCorreo(usuario.getCorreo());
 
         clienteService.save(clienteExistente);
         usuarioService.save(usuarioExistente);
 
-
         return "redirect:/usuario/editar/" + usuario.getIdusuario();
     }
 
     @PostMapping("/cambiar_contraseña")
-    public String cambiarContraseña(@RequestParam Long id,String rawPassword,Model model,String newPassword,RedirectAttributes redirectAttributes){
+    public String cambiarContraseña(@RequestParam Long id,String rawPassword,Model model,String newPassword,
+                                    RedirectAttributes redirectAttributes){
         Usuario usuario = new Usuario();
         Optional<Usuario> optionalUsuario = usuarioService.findbyId(id);
         usuario = optionalUsuario.get();

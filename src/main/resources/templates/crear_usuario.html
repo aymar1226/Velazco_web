@@ -19,7 +19,7 @@
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
-                <a class="nav-link" href="/">Inicio</a>
+                <a class="nav-link" href="/inicio">Inicio</a>
             </li>
         </ul>
     </div>
@@ -54,6 +54,9 @@
                     <div class="col-sm-8">
                         <input type="password" name="password" class="form-control" th:field="*{usuario.password}" required/>
                     </div>
+                </div>
+                <div th:if="${error_correo}" class="error-message">
+                    <p th:text="${error_correo}" class="alert alert-danger"></p>
                 </div>
                 <div class="text-center p">
                     <button type="submit" class="botons">Guardar</button>

@@ -82,18 +82,23 @@ public class EmpleadoController {
     }
 
     @PostMapping("/crear_usuario")
-    public String guardarUsuario(Usuario usuario,Empleado empleado){
-
-        usuario.setPassword (passwordEncoder.encode(usuario.getPassword()));
-        Usuario nuevoUsuario= usuarioService.save(usuario);
+    public String guardarUsuario(Usuario usuario,Empleado empleado,Model model){
 
         Empleado empleadoExistente = empleadoService.findbyId(empleado.getIdEmpleado())
                 .orElseThrow(() -> new IllegalArgumentException("Empleado no encontrado")); // Obtener el objeto Empleado de manera segura
 
-        empleadoExistente.setUsuario(nuevoUsuario);
-        empleadoService.save(empleadoExistente);
+        Optional<Usuario> optionalUser=usuarioService.findByEmail(usuario.getCorreo());
+        if(optionalUser.isPresent()){
+            model.addAttribute("error_correo", "El correo ya está registrado.");
+            return "crear_usuario";
+        }else {
+            usuario.setPassword (passwordEncoder.encode(usuario.getPassword()));
+            Usuario nuevoUsuario= usuarioService.save(usuario);
+            empleadoExistente.setUsuario(nuevoUsuario);
+            empleadoService.save(empleadoExistente);
 
-        return "redirect:/empleado/lista_empleados";
+            return "redirect:/empleado/lista_empleados";
+        }
     }
 
 }

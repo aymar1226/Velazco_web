@@ -67,3 +67,25 @@
     75%{margin-left: -300%;}
     100%{margin-left: -300%;}
 }
+.mensaje {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.cerrar {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.cerrar:hover {
+    transform: scale(1.2);
+}

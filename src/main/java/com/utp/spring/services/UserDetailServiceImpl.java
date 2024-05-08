@@ -15,20 +15,14 @@ import java.util.Optional;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
-
     @Autowired
     private IUsuarioService usuarioService;
     @Autowired
     private IRolService rolService;
-
     @Autowired
     private BCryptPasswordEncoder bcrypt;
-
-
     @Autowired
     HttpSession session;
-
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Usuario> optionalUser=usuarioService.findByEmail(username);
@@ -41,7 +35,8 @@ public class UserDetailServiceImpl implements UserDetailsService {
             if ( rol== null) {
                 throw new UsernameNotFoundException("Rol no encontrado para el usuario");
             }
-            return User.builder().username(usuario.getCorreo()).password(usuario.getPassword()).roles(usuario.getRol().getNombre()).build();
+            return User.builder().username(usuario.getCorreo())
+                    .password(usuario.getPassword()).roles(usuario.getRol().getNombre()).build();
         }else {
             throw new UsernameNotFoundException("Usuario no encontrado");
         }

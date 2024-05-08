@@ -13,12 +13,12 @@
             <h4>Formulario Registro</h4>
             <input class="controls" type="text" name="nombre" id="Nombre" placeholder="Ingrese su nombre" required>
             <input class="controls" type="text" name="apellido" id="Apellido" placeholder="Ingrese su apellido" required>
-            <input class="controls" type="text" name="dni" id="Dni" placeholder="Ingrese su DNI" >
+            <input class="controls" type="number" name="dni" id="Dni" placeholder="Ingrese su DNI" maxlength="8" pattern="[0-9]{8}" title="Debe ser un número de 8 dígitos" required>
             <input class="controls" type="text" name="telefono" id="Telefono" placeholder="Ingrese su Telefono">
             <!--<input class="controls" type="text" name="rol" id="rol" placeholder="Ingrese su rol">-->
             <input class="controls" type="email" name="correo" id="Correo" placeholder="Ingrese su Correo" required>
             <input class="controls" type="password" name="password" id="Password" placeholder="Ingrese su Contraseña"required>
-            <input class="controls" type="password" name="pass" id="RepetirPassword" placeholder="Repetir Contraseña">
+            <input class="controls" type="password" name="pass" id="RepetirPassword" placeholder="Repetir Contraseña"required>
             <label class="container">Estoy de acuerdo con los Términos y Condiciones
                 <input type="checkbox" checked="checked">
                 <span class="checkmark"></span>

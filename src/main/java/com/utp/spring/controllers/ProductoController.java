@@ -54,17 +54,14 @@ public class ProductoController {
         if(session.getAttribute("idusuario")!=null){
             modelo.addAttribute(usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get());
         }
-
         //eleccion header
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
-
         //FILTRO
         Long categoriaID = 1l;
         List<Producto> listaProductos = productoService.listAll(categoriaID);
         modelo.addAttribute("listaProductos", listaProductos);
         return "categoria/bizcochos";
     }
-
     @GetMapping("/galletas")
     public String filtrarGalleta(Model modelo,HttpSession session){
         //validando si es nulo
@@ -88,17 +85,14 @@ public class ProductoController {
         if(session.getAttribute("idusuario")!=null){
             modelo.addAttribute(usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get());
         }
-
         //eleccion header
         modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
-
         //FILTRO
         Long categoriaID = 3l;
         List<Producto> listaProductos = productoService.listAll(categoriaID);
         modelo.addAttribute("listaProductos", listaProductos);
         return "categoria/pasteles";
     }
-
     @GetMapping("/dulces")
     public String filtrarDulce(Model modelo,HttpSession session){
         //validando si es nulo

@@ -19,7 +19,6 @@ public class ProveedorController {
 
     @Autowired
     private IProveedorService proveedorService;
-
     @GetMapping("/lista_proveedores")
     public String listarProveedores(Model modelo){
         List<Proveedor> listaProveedores= proveedorService.findAll();

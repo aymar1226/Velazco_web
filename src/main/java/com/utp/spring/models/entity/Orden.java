@@ -19,9 +19,6 @@ public class Orden {
 	@ManyToOne
 	@JoinColumn(name = "usuarioID")
 	private Usuario usuario;
-
-
-	
 	@OneToMany(mappedBy = "orden")
 	private List<DetalleOrden> detalle;
 	

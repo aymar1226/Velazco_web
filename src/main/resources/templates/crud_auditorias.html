@@ -64,9 +64,12 @@
                 <td th:text="${auditoria.fecha_fin}"></td>
                 <td th:text="${auditoria.estado}"> </td>
                 <td>
-                    <a th:if="${auditoria != null}" th:href="@{'/auditoria/editar'+'/'+${auditoria.idAuditoria}}" class="btn btn-info">Editar</a>
+                    <div class="btn-group align-top bg-dark">
+                        <a th:if="${auditoria != null}" th:href="@{'/auditoria/editar'+'/'+${auditoria.idAuditoria}}" class="btn btn-sm btn-outline-secondary badge">Editar</a>
+                        <a class="btn btn-sm btn-outline-secondary badge">Observaciones</a>
+                        <a th:href="@{'/auditoria/eliminar'+'/'+${auditoria.idAuditoria}}" class="btn btn-sm btn-outline-secondary badge">Eliminar</a>
 
-                    <a th:href="@{'/auditoria/eliminar'+'/'+${auditoria.idAuditoria}}" class="btn btn-danger">Eliminar</a>
+                    </div>
                 </td>
 
             </tr>

@@ -42,7 +42,8 @@ public class ContactoController {
 
 
     @PostMapping("/contacto")
-    public String submitContact(HttpServletRequest request,@RequestParam("attachment") MultipartFile multipartFile) throws MessagingException, UnsupportedEncodingException {
+    public String submitContact(HttpServletRequest request,@RequestParam("attachment") MultipartFile multipartFile)
+            throws MessagingException, UnsupportedEncodingException {
 
 
         String fullname = request.getParameter("fullname");

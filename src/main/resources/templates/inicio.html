@@ -10,13 +10,19 @@
     <title>PAG WEB</title>
     <link rel="stylesheet" th:href="@{/css/header.css}">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/nosotros.css">
     <link rel="stylesheet" href="css/footer.css">
+
 </head>
     <div th:include="/template_notusuario.html::header_notuser" th:if="${rolsesion==null}"></div>
     <div th:include="/template_usuario.html::header_user" sec:authorize="hasRole('USER')"></div>
     <div th:include="/template_admin.html::header" sec:authorize="hasRole('ADMIN')"></div>
 <body>
+
+<div th:if="${mensaje}" class="mensaje">
+    <p>Pedido realizado y registrado correctamente</p>
+    <span class="cerrar" onclick="cerrarMensaje()">×</span>
+</div>
+
 <div class="slider">
     <ul>
         <li>
@@ -56,4 +62,5 @@
         <li class="face"><a href="https://www.facebook.com/dulceriapasteleriavelazco/" target="_blank"><img src="img/facebook.png" alt=""></a></li>
     </ul>
 </footer>
+<script src="js/script.js"></script>
 </html>

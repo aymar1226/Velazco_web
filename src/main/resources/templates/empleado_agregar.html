@@ -28,7 +28,7 @@
 
     <div class="container text-center contenedor">
         <div>
-            <h1 th:if="${empleado.idEmpleado == null}" class="contenedor_titulo">Agregar un nuevo producto</h1>
+            <h1 th:if="${empleado.idEmpleado == null}" class="contenedor_titulo">Agregar un empleado</h1>
         </div>
         <form th:action="@{/empleado/guardar}" th:object="${empleado}" method="post" style="max-width:600px;margin:0 auto;" enctype="multipart/form-data">
             <input type="hidden" th:field="*{idEmpleado}" th:value="${empleado.idEmpleado}"/>

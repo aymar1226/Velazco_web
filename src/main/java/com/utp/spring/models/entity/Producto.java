@@ -8,27 +8,20 @@ import javax.persistence.*;
 @Table(name = "productos")
 @ToString
 public class Producto {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", nullable = false)
     private Long idproducto;
-
     @Column(name = "nombre")
     private String nombre;
-
     @Column(name = "descripcion")
     private String descripcion;
-
     @Column(name = "stock")
     private String stock;
-
     @Column(name = "precio")
     private Double precio;
-
     @Column(name = "imagen")
     private String imagen;
-
     @ManyToOne
     @JoinColumn(name = "categoriaID")
     private Categoria categoria;

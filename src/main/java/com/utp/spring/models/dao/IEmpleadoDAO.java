@@ -10,12 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface IEmpleadoDAO extends JpaRepository<Empleado,Long> {
-
-
     @Query(
             value = "SELECT r.nombre FROM usuarios u INNER JOIN roles r ON u.rolID=r.ID WHERE u.ID = ?1",
             nativeQuery = true
     )
     Optional<Usuario> obtenerRol(String correo);
-
 }
