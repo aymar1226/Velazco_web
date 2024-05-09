@@ -1,7 +1,9 @@
-package com.utp.spring.services;
+package com.utp.spring.security;
 
 import com.utp.spring.models.entity.Rol;
 import com.utp.spring.models.entity.Usuario;
+import com.utp.spring.services.IRolService;
+import com.utp.spring.services.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
