@@ -21,26 +21,13 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private IUsuarioService usuarioService;
     @Autowired
     private IRolService rolService;
-    @Autowired
-    private BCryptPasswordEncoder bcrypt;
-    @Autowired
-    HttpSession session;
+
+
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Usuario> optionalUser=usuarioService.findByEmail(username);
-        if(optionalUser.isPresent()){
-
-            session.setAttribute("idusuario",optionalUser.get().getIdusuario());
-            Usuario usuario= optionalUser.get();
-            Optional<Rol> rol = rolService.findbyId(usuario.getRol().getIdRol());
-
-            if ( rol== null) {
-                throw new UsernameNotFoundException("Rol no encontrado para el usuario");
-            }
-            return User.builder().username(usuario.getCorreo())
-                    .password(usuario.getPassword()).roles(usuario.getRol().getNombre()).build();
-        }else {
-            throw new UsernameNotFoundException("Usuario no encontrado");
-        }
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Usuario usuario=usuarioService
+                .findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("El usuario con email "+email+" no existe."));
+        return new UserDetailsImpl(usuario);
     }
 }
