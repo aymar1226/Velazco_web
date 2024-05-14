@@ -3,7 +3,7 @@ package com.utp.spring.models.entity;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "personas")

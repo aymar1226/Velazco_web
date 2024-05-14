@@ -2,6 +2,7 @@ package com.utp.spring.security;
 
 import com.utp.spring.models.entity.Usuario;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

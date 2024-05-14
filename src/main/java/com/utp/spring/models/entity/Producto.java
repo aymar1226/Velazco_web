@@ -2,7 +2,7 @@ package com.utp.spring.models.entity;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "productos")

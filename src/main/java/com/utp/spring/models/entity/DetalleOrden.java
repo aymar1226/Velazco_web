@@ -1,6 +1,6 @@
 package com.utp.spring.models.entity;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "ordenes_detalles")
