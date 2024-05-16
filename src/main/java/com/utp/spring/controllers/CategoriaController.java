@@ -10,9 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("api/categorias")
 public class CategoriaController {
 
     @Autowired
@@ -20,17 +24,12 @@ public class CategoriaController {
 
     @Autowired
     private IUsuarioService usuarioService;
-    @GetMapping("/categorias")
-    public String listarCategoria(Model modelo, HttpSession session){
 
-        if(session.getAttribute("idusuario")!=null){
-            modelo.addAttribute(usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get());
-        }
-
-        modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
+    @GetMapping("/lista")
+    public List<Categoria> listarCategoria(){
 
         List<Categoria> listaCategorias = categoriaService.findAll();
-        modelo.addAttribute("listaCategorias", listaCategorias);
-        return "productos";
+
+        return listaCategorias;
     }
 }

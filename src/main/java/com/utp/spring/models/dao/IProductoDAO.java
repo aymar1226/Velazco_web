@@ -11,4 +11,8 @@ import java.util.List;
 public interface IProductoDAO extends JpaRepository<Producto,Long>{
     @Query("SELECT p FROM Producto p JOIN p.categoria c WHERE c.id = :categoriaID")
     List<Producto> findAll(@Param("categoriaID") Long categoriaID);
+
+    @Query("SELECT p.imagen FROM Producto p WHERE p.id = :productoId")
+    String findProductImageById(Long productoId);
+
 }

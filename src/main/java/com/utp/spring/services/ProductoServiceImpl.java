@@ -3,13 +3,22 @@ package com.utp.spring.services;
 import com.utp.spring.models.dao.IProductoDAO;
 import com.utp.spring.models.entity.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ProductoServiceImpl implements IProductoService {
+
+    private final Path productImagesDirectory = Paths.get("img//");
+
+
     @Autowired
     private IProductoDAO IProductoDAO;
 
@@ -49,5 +58,23 @@ public class ProductoServiceImpl implements IProductoService {
             return IProductoDAO.findAll(categoriaID);
         }
         return IProductoDAO.findAll();
+    }
+
+    //Cargar imagen
+    @Override
+    public Resource loadProductImage(String imageName) throws MalformedURLException {
+        Path imagePath = productImagesDirectory.resolve(imageName);
+        Resource resource = new UrlResource(imagePath.toUri());
+        if (resource.exists() || resource.isReadable()) {
+            return resource;
+        } else {
+            throw new RuntimeException("No se pudo cargar la imagen del producto: " + imageName);
+        }
+    }
+
+    @Override
+    public String findProductImageById(Long productoId) {
+        String imageName=IProductoDAO.findProductImageById(productoId);
+        return imageName;
     }
 }

@@ -6,6 +6,9 @@ import com.utp.spring.models.entity.Producto;
 import com.utp.spring.models.entity.Usuario;
 import com.utp.spring.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +40,24 @@ public class ProductoController {
     }
 
 
+    //Obtener imagen del producto
+    @GetMapping("imagen/{id}")
+    public ResponseEntity<Resource> getProductImage(@PathVariable Long id) throws MalformedURLException {
+        String imageName = productoService.findProductImageById(id); // Obtener el nombre de la imagen del producto desde la base de datos
+        Resource image = productoService.loadProductImage(imageName); // Cargar la imagen del producto desde el sistema de archivos o el almacenamiento
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_JPEG)
+                .body(image);
+    }
+
+    //Obtener producto por categoria
+    @GetMapping("/menu/{id}")
+    public List<Producto> filtrarPorCategoria(@PathVariable Long id){
+        List<Producto> listaProductos = productoService.listAll(id);
+        return listaProductos;
+    }
+
+
     @GetMapping("/bizcochos")
     public String filtrarBizcocho(Model modelo, HttpSession session){
         //validando si es nulo
@@ -50,6 +72,7 @@ public class ProductoController {
         modelo.addAttribute("listaProductos", listaProductos);
         return "categoria/bizcochos";
     }
+
     @GetMapping("/galletas")
     public String filtrarGalleta(Model modelo,HttpSession session){
         //validando si es nulo

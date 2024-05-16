@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/dulces.css">
     <link rel="stylesheet" href="css/boton.css">
 </head>
+<body>
     <div th:include="/template_notusuario.html::header_notuser" th:if="${rolsesion==null}"></div>
     <div th:include="/template_usuario.html::header_user" sec:authorize="hasRole('USER')"></div>
     <div th:include="/template_admin.html::header" sec:authorize="hasRole('ADMIN')"></div>
