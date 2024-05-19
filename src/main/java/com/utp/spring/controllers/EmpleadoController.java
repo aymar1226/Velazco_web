@@ -10,7 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -58,14 +57,6 @@ public class EmpleadoController {
         return "redirect:/empleado/lista_empleados";
     }
 
-    @GetMapping("/eliminar/{id}")
-    public String delete(@PathVariable Long id){
-        Optional<Empleado> empleado = empleadoService.findbyId(id);
-        Usuario user =  empleado.get().getUsuario();
-        empleadoService.delete(id);
-        usuarioService.delete(user);
-        return "redirect:/empleado/lista_empleados";
-    }
 
     @GetMapping("/crear/{id}")
     public String crearUsuario(@PathVariable Long id,Model modelo){
@@ -75,30 +66,12 @@ public class EmpleadoController {
 
         modelo.addAttribute("empleado",empleado);
         modelo.addAttribute("usuario",new Usuario());
-        List<Rol>listaRoles = rolService.findAll();
+        List<Privilegio>listaRoles = rolService.findAll();
         modelo.addAttribute("listaRoles",listaRoles);
 
         return "crear_usuario";
     }
 
-    @PostMapping("/crear_usuario")
-    public String guardarUsuario(Usuario usuario,Empleado empleado,Model model){
 
-        Empleado empleadoExistente = empleadoService.findbyId(empleado.getIdEmpleado())
-                .orElseThrow(() -> new IllegalArgumentException("Empleado no encontrado")); // Obtener el objeto Empleado de manera segura
-
-        Optional<Usuario> optionalUser=usuarioService.findByEmail(usuario.getCorreo());
-        if(optionalUser.isPresent()){
-            model.addAttribute("error_correo", "El correo ya está registrado.");
-            return "crear_usuario";
-        }else {
-            usuario.setPassword (passwordEncoder.encode(usuario.getPassword()));
-            Usuario nuevoUsuario= usuarioService.save(usuario);
-            empleadoExistente.setUsuario(nuevoUsuario);
-            empleadoService.save(empleadoExistente);
-
-            return "redirect:/empleado/lista_empleados";
-        }
-    }
 
 }

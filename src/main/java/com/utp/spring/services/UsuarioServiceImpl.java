@@ -1,10 +1,9 @@
 package com.utp.spring.services;
 
 import com.utp.spring.models.dao.IUsuarioDAO;
-import com.utp.spring.models.entity.Rol;
+import com.utp.spring.models.entity.Privilegio;
 import com.utp.spring.models.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +26,9 @@ public class UsuarioServiceImpl implements IUsuarioService{
     }
 
     @Override
-    public Usuario save(Usuario usuario) {
+    public Usuario save(Usuario usuario)
+    {
+
         return usuarioDAO.save(usuario);
     }
 
@@ -46,9 +47,9 @@ public class UsuarioServiceImpl implements IUsuarioService{
     public String obtenerRolPorId(Long usuarioId) {
         Usuario usuario = usuarioDAO.findById(usuarioId).orElse(null);
         if(usuario!=null){
-            Rol rol = usuario.getRol();
-            if (rol!=null){
-                return rol.getNombre();
+            Privilegio privilegio = usuario.getPrivilegio();
+            if (privilegio !=null){
+                return privilegio.getNombre();
             }
         }
         return null;

@@ -38,7 +38,7 @@ public class ListaProductosExcel extends AbstractXlsView {
         for (Producto producto: listaC) {
             filaData = hoja.createRow(numFila);
 
-            filaData.createCell(0).setCellValue(producto.getIdproducto());
+            filaData.createCell(0).setCellValue(producto.getId());
             filaData.createCell(1).setCellValue(producto.getCategoria().toString());
             filaData.createCell(2).setCellValue(producto.getNombre());
             filaData.createCell(3).setCellValue(producto.getDescripcion());

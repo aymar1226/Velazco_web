@@ -42,6 +42,7 @@ public class OrdenController {
     //datos de la orden
     Orden orden = new Orden();
 
+    /*
     @PostMapping("/carrito")
     public String AñadirCarrito(@RequestParam Long id, @RequestParam Integer cantidad, Model modelo){
         DetalleOrden detalleOrden = new DetalleOrden();
@@ -52,7 +53,7 @@ public class OrdenController {
         producto = optionalProducto.get();
 
         detalleOrden.setCantidad(cantidad);
-        detalleOrden.setPrecio(producto.getPrecio());
+        detalleOrden.setPrecio_venta(producto.getPrecio());
         detalleOrden.setNombre(producto.getNombre());
         detalleOrden.setTotal(producto.getPrecio()*cantidad);
         detalleOrden.setProducto(producto);
@@ -72,10 +73,10 @@ public class OrdenController {
         modelo.addAttribute("orden",orden);
 
         return "carrito";
-    }
+    }*/
 
     //quitar el producto del carrito
-    @GetMapping("/eliminar/carrito/{id}")
+   /* @GetMapping("/eliminar/carrito/{id}")
     public String eliminarProductoCarrito(@PathVariable Long id,Model modelo){
 
         //lista nueva de productos
@@ -98,7 +99,7 @@ public class OrdenController {
         modelo.addAttribute("orden",orden);
 
         return "carrito";
-    }
+    }*/
 
     @GetMapping("/getCarrito")
     public String getCarrito(Model modelo,HttpSession session){
@@ -126,7 +127,7 @@ public class OrdenController {
         return "resumenorden";
     }
 
-    @GetMapping("/guardarOrden")
+   /* @GetMapping("/guardarOrden")
     public String guardarOrden(HttpSession session){
         Date fechaCreacion = new Date();
         orden.setFechaCreacion(fechaCreacion);
@@ -149,6 +150,6 @@ public class OrdenController {
         detalles.clear();
 
         return "redirect:/pago";
-    }
+    }*/
 
 }

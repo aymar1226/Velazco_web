@@ -34,7 +34,7 @@ public class OrdenServiceImpl implements IOrdenService {
 		
 		List<Integer> numeros= new ArrayList<Integer>();
 		
-		ordenes.stream().forEach(o -> numeros.add( Integer.parseInt( o.getNumero())));
+		ordenes.stream().forEach(o -> numeros.add( Integer.parseInt( o.getCodigo())));
 		
 		if (ordenes.isEmpty()) {
 			numero=1;

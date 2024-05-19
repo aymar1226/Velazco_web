@@ -1,7 +1,7 @@
 package com.utp.spring.services;
 
 import com.utp.spring.models.dao.IRolDao;
-import com.utp.spring.models.entity.Rol;
+import com.utp.spring.models.entity.Privilegio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,23 +15,23 @@ public class RolServiceImpl implements IRolService {
     private IRolDao rolDao;
 
     @Override
-    public Optional<Rol> findbyId(Long id) {
+    public Optional<Privilegio> findbyId(Long id) {
         return rolDao.findById(id);
     }
 
     @Override
-    public List<Rol> findAll() {
+    public List<Privilegio> findAll() {
         return rolDao.findAll();
     }
 
     @Override
-    public Rol save(Rol rol) {
-        return rolDao.save(rol);
+    public Privilegio save(Privilegio privilegio) {
+        return rolDao.save(privilegio);
     }
 
     @Override
-    public void delete(Rol rol) {
-        rolDao.delete(rol);
+    public void delete(Privilegio privilegio) {
+        rolDao.delete(privilegio);
 
     }
 }

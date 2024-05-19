@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 public class ProductoServiceImpl implements IProductoService {
 
-    private final Path productImagesDirectory = Paths.get("img//");
+    private final Path productImagesDirectory = Paths.get("mediafiles//");
 
 
     @Autowired

@@ -52,7 +52,7 @@
             <tbody>
             <tr th:each="usuario : ${listaUsuarios}">
                 <td th:text="${usuario.idusuario}"></td>
-                <td th:text="${usuario.rol.nombre}"></td>
+                <td th:text="${usuario.privilegio.nombre}"></td>
 
                 <td th:if="${usuario.cliente != null}">Cliente</td>
                 <td th:unless="${usuario.cliente != null}">Empleado</td>

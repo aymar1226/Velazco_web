@@ -7,19 +7,15 @@ import lombok.ToString;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "cliente")
+@Table(name = "privilegio")
 @Data
-public class Cliente {
-
+public class Privilegio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cliente", nullable = false)
+    @Column(name = "id_privilegio", nullable = false)
     private Long id;
+    private String nombre;
     private char estado;
-
-    @OneToOne
-    @JoinColumn(name = "persona_id")
-    private Persona persona;
 
 
 }

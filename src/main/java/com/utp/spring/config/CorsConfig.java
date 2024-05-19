@@ -22,6 +22,9 @@ public class CorsConfig {
                         .allowedOrigins("http://localhost:4200")
                         .allowedMethods("*");
 
+                registry.addMapping("/media/**")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("*");
 
             }
         };

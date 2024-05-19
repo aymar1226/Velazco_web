@@ -1,5 +1,6 @@
 package com.utp.spring.models.entity;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,50 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "categorias")
+@Table(name = "categoria")
+@Data
 public class Categoria {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", nullable = false)
-    private Long idcategoria;
+    @Column(name = "id_categoria", nullable = false)
+    private Long id;
 
     private String nombre;
 
     private String descripcion;
 
-    private String imagen;
+    private char estado;
 
-    public Long getIdcategoria() {
-        return idcategoria;
-    }
 
-    public void setIdcategoria(Long idcategoria) {
-        this.idcategoria = idcategoria;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
 
 
     @Override

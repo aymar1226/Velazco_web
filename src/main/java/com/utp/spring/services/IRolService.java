@@ -1,16 +1,16 @@
 package com.utp.spring.services;
 
-import com.utp.spring.models.entity.Rol;
+import com.utp.spring.models.entity.Privilegio;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface IRolService {
 
-    Optional<Rol> findbyId(Long id);
-    List<Rol> findAll();
-    Rol save(Rol rol);
-    void delete(Rol rol);
+    Optional<Privilegio> findbyId(Long id);
+    List<Privilegio> findAll();
+    Privilegio save(Privilegio privilegio);
+    void delete(Privilegio privilegio);
 
 
 }

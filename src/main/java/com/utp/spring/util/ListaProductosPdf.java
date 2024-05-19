@@ -45,7 +45,7 @@ public class ListaProductosPdf  extends AbstractPdfView {
 
         PdfPTable tablaCategories = new PdfPTable(5);
         listaP.forEach(produc ->{
-            tablaCategories.addCell(produc.getIdproducto().toString());
+            tablaCategories.addCell(produc.getId().toString());
             tablaCategories.addCell(produc.getCategoria().toString());
             tablaCategories.addCell(produc.getNombre());
             tablaCategories.addCell(produc.getDescripcion());

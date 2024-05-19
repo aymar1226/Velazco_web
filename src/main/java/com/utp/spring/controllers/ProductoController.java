@@ -7,6 +7,7 @@ import com.utp.spring.models.entity.Usuario;
 import com.utp.spring.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,19 @@ public class ProductoController {
                 .body(image);
     }
 
+    @PostMapping("/agregar")
+    public ResponseEntity<Producto> agregarProducto(@RequestBody Producto producto,MultipartFile multipartFile) {
+        try {
+            Producto nuevoProducto = productoService.save(producto);
+            return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //---------------------------Controllers----------------------------------------//
+
+
     //Obtener producto por categoria
     @GetMapping("/menu/{id}")
     public List<Producto> filtrarPorCategoria(@PathVariable Long id){
@@ -58,68 +72,6 @@ public class ProductoController {
     }
 
 
-    @GetMapping("/bizcochos")
-    public String filtrarBizcocho(Model modelo, HttpSession session){
-        //validando si es nulo
-        if(session.getAttribute("idusuario")!=null){
-            modelo.addAttribute(usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get());
-        }
-        //eleccion header
-        modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
-        //FILTRO
-        Long categoriaID = 1l;
-        List<Producto> listaProductos = productoService.listAll(categoriaID);
-        modelo.addAttribute("listaProductos", listaProductos);
-        return "categoria/bizcochos";
-    }
-
-    @GetMapping("/galletas")
-    public String filtrarGalleta(Model modelo,HttpSession session){
-        //validando si es nulo
-        if(session.getAttribute("idusuario")!=null){
-            modelo.addAttribute(usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get());
-        }
-
-        //eleccion header
-        modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
-
-        //FILTRO
-        Long categoriaID = 2l;
-        List<Producto> listaProductos = productoService.listAll(categoriaID);
-        modelo.addAttribute("listaProductos", listaProductos);
-        return "categoria/galletas";
-    }
-
-    @GetMapping("/pasteles")
-    public String filtrarPastel(Model modelo,HttpSession session){
-        //validando si es nulo
-        if(session.getAttribute("idusuario")!=null){
-            modelo.addAttribute(usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get());
-        }
-        //eleccion header
-        modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
-        //FILTRO
-        Long categoriaID = 3l;
-        List<Producto> listaProductos = productoService.listAll(categoriaID);
-        modelo.addAttribute("listaProductos", listaProductos);
-        return "categoria/pasteles";
-    }
-    @GetMapping("/dulces")
-    public String filtrarDulce(Model modelo,HttpSession session){
-        //validando si es nulo
-        if(session.getAttribute("idusuario")!=null){
-            modelo.addAttribute(usuarioService.findbyId(Long.parseLong(session.getAttribute("idusuario").toString())).get());
-        }
-
-        //eleccion header
-        modelo.addAttribute("rolsesion",session.getAttribute("rolusuario"));
-
-        //FILTRO
-        Long categoriaID = 4l;
-        List<Producto> listaProductos = productoService.listAll(categoriaID);
-        modelo.addAttribute("listaProductos", listaProductos);
-        return "categoria/dulces";
-    }
 
     @GetMapping("/productohome/{id}")
     public String productoHome(@PathVariable Long id,Model modelo,HttpSession session){
@@ -145,7 +97,7 @@ public class ProductoController {
     @PostMapping("/productos/guardar")
     public String guardarProducto(Producto producto, @RequestParam("img") MultipartFile file) throws IOException {
         //image
-        if(producto.getIdproducto()==null){
+        if(producto.getId()==null){
             String nombreImagen=upload.saveImage(file);
             producto.setImagen(nombreImagen);
         }
@@ -170,7 +122,7 @@ public class ProductoController {
     @PostMapping("/productos/update")
     public String update(Producto producto,@RequestParam("img") MultipartFile file) throws IOException {
         Producto p=new Producto();
-        p=productoService.get(producto.getIdproducto()).get();
+        p=productoService.get(producto.getId()).get();
         if (file.isEmpty()){
 
             producto.setImagen(p.getImagen());

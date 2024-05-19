@@ -36,8 +36,7 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Override
     public Boolean existsByDNI(String dni) {
-
-        return clienteDAO.countByDNI(dni)>0;
+        return false;
     }
 
 

@@ -9,7 +9,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IClienteDAO extends JpaRepository<Cliente, Long> {
-    @Query("SELECT COUNT(c) FROM Cliente c WHERE c.dni = :dni")
-    Long countByDNI(@Param("dni") String dni);
 
 }

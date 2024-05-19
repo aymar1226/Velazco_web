@@ -1,10 +1,13 @@
 package com.utp.spring.security;
 
+import com.utp.spring.models.dto.PersonaUsuarioDTO;
+import com.utp.spring.models.entity.Persona;
 import com.utp.spring.models.entity.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -12,7 +15,7 @@ import java.util.Collections;
 @AllArgsConstructor
 public class UserDetailsImpl implements UserDetails {
 
-    private final Usuario usuario;
+    private final PersonaUsuarioDTO persona;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -21,12 +24,12 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getPassword() {
-        return usuario.getPassword();
+        return persona.getUsuarioContraseña();
     }
 
     @Override
     public String getUsername() {
-        return usuario.getCorreo();
+        return persona.getUsuarioCorreo();
     }
 
     @Override
@@ -50,6 +53,6 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     public String getNombre(){
-        return usuario.getCliente().getNombre();
+        return persona.getPersonaNombre();
     }
 }

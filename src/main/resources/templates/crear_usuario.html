@@ -42,9 +42,9 @@
                 <div class="form-group row">
                     <label class="col-form-label col-sm-4">Rol</label>
                     <div class="col-sm-8">
-                        <select th:field="*{usuario.rol}" class="form-control" required>
-                            <th:block th:each="rol :${listaRoles}">
-                                <option th:text="${rol.nombre}" th:value="${rol.idRol}"></option>
+                        <select th:field="*{usuario.privilegio}" class="form-control" required>
+                            <th:block th:each="privilegio :${listaRoles}">
+                                <option th:text="${privilegio.nombre}" th:value="${privilegio.idRol}"></option>
                             </th:block>
                         </select>
                     </div>

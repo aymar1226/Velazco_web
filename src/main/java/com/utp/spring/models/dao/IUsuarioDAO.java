@@ -10,11 +10,10 @@ import java.util.Optional;
 @Repository
 public interface IUsuarioDAO extends JpaRepository<Usuario,Long> {
     @Query(
-            value = "SELECT * FROM usuarios  WHERE usuarios.correo LIKE ?1",
+            value = "SELECT * FROM usuario WHERE usuario.correo LIKE ?1 AND usuario.estado = 1",
             nativeQuery = true
     )
     Optional<Usuario> findByEmail(String correo);
-
 
 
 
