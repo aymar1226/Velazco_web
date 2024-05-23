@@ -10,9 +10,8 @@ import java.util.Optional;
 public interface IProductoService {
     public List<Producto> findAll();
     public Producto save(Producto producto);
-    public Producto findbyId(Long id);
     public void delete(Long id);
-    public Optional<Producto> get(Long id);
+    public Optional<Producto> findbyId(Long id);
     public void update(Producto producto);
 
     public List<Producto> listAll(Long categoriaID);

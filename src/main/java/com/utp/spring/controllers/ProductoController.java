@@ -52,7 +52,7 @@ public class ProductoController {
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<Producto> agregarProducto(@RequestBody Producto producto,MultipartFile multipartFile) {
+    public ResponseEntity<Producto> agregarProducto(@RequestBody Producto producto) {
         try {
             Producto nuevoProducto = productoService.save(producto);
             return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
@@ -61,8 +61,24 @@ public class ProductoController {
         }
     }
 
-    //---------------------------Controllers----------------------------------------//
+    @GetMapping("/{id}")
+    public ResponseEntity<Producto> getProductbyId(@PathVariable Long id) {
+        return productoService.findbyId(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
 
+
+    @PutMapping("update/{id}")
+    public ResponseEntity<Producto> updateProducto(@PathVariable Long id,@RequestBody Producto producto,MultipartFile multipartFile) {
+        try {
+            producto.setId(id);
+            Producto productoModificado = productoService.save(producto);
+            return new ResponseEntity<>(productoModificado, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     //Obtener producto por categoria
     @GetMapping("/menu/{id}")
@@ -73,11 +89,20 @@ public class ProductoController {
 
 
 
+
+
+    //---------------------------Controllers----------------------------------------//
+
+
+
+
+
+
     @GetMapping("/productohome/{id}")
     public String productoHome(@PathVariable Long id,Model modelo,HttpSession session){
 
         Producto producto = new Producto();
-        Optional<Producto> productoOptional= productoService.get(id);
+        Optional<Producto> productoOptional= productoService.findbyId(id);
         producto = productoOptional.get();
         modelo.addAttribute("producto",producto);
 
@@ -110,7 +135,7 @@ public class ProductoController {
     @GetMapping("/productos/editar/{id}")
     public String edit(@PathVariable Long id,Model modelo){
         Producto producto = new Producto();
-        Optional<Producto> optionalProducto=productoService.get(id);
+        Optional<Producto> optionalProducto=productoService.findbyId(id);
         producto=optionalProducto.get();
         modelo.addAttribute("producto",producto);
 
@@ -122,7 +147,7 @@ public class ProductoController {
     @PostMapping("/productos/update")
     public String update(Producto producto,@RequestParam("img") MultipartFile file) throws IOException {
         Producto p=new Producto();
-        p=productoService.get(producto.getId()).get();
+        p=productoService.findbyId(producto.getId()).get();
         if (file.isEmpty()){
 
             producto.setImagen(p.getImagen());
@@ -143,7 +168,7 @@ public class ProductoController {
     public String delete(@PathVariable Long id){
 
         Producto p =new Producto();
-        p=productoService.get(id).get();
+        p=productoService.findbyId(id).get();
 
         //eliminar cuando no sea imagen por defecto
         if(!p.getImagen().equals("default.jpg")){

@@ -33,10 +33,7 @@ public class ProductoServiceImpl implements IProductoService {
         return producto;
     }
 
-    @Override
-    public Producto findbyId(Long id) {
-        return IProductoDAO.findById(id).orElse(null);
-    }
+
 
     @Override
     public void delete(Long id) {
@@ -44,9 +41,11 @@ public class ProductoServiceImpl implements IProductoService {
     }
 
     @Override
-    public Optional<Producto> get(Long id) {
+    public Optional<Producto> findbyId(Long id) {
         return IProductoDAO.findById(id);
     }
+
+
 
     @Override
     public void update(Producto producto) {

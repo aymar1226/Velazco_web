@@ -37,6 +37,7 @@ public class Usuario {
     @JoinColumn(name = "privilegio_id")
     private Privilegio privilegio;
 
+
     @OneToOne
     @JoinColumn(name = "persona_id")
     private Persona persona;

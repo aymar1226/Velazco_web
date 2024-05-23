@@ -1,0 +1,64 @@
+package com.utp.spring.controllers;
+
+import com.utp.spring.models.dto.CarritoItemRequest;
+import com.utp.spring.models.dto.ProductoDTO;
+import com.utp.spring.models.entity.Carrito;
+import com.utp.spring.models.entity.CarritoItem;
+import com.utp.spring.models.entity.Producto;
+import com.utp.spring.models.entity.Usuario;
+import com.utp.spring.services.ICarritoItemService;
+import com.utp.spring.services.ICarritoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("api/carrito")
+public class CarritoController {
+
+    @Autowired
+    private ICarritoService carritoService;
+
+    @Autowired
+    private ICarritoItemService carritoItemService;
+
+    @PostMapping("/crear")
+    public ResponseEntity<Carrito> crearCarrito( @RequestBody Usuario usuario) {
+        try {
+            Carrito nuevoCarrito= carritoService.save(usuario);
+            return new ResponseEntity<>(nuevoCarrito, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/item/crear")
+    public ResponseEntity<CarritoItem> guardarItem(@RequestBody CarritoItemRequest request){
+
+        try {
+            CarritoItem item = carritoItemService.save(request.getCorreo(),request.getProducto());
+            return new ResponseEntity<>(item,HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Carrito> updateCarrito(@RequestBody String correo, @RequestBody List<ProductoDTO> productos){
+        try {
+            Carrito carritoActualizado= carritoService.update(correo,productos);
+            return new ResponseEntity<>(carritoActualizado,HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/item/lista/{correo}")
+    public List<CarritoItem> listarItems(@PathVariable String correo ) {
+        return carritoItemService.findAll(correo);
+    }
+
+}

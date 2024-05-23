@@ -26,5 +26,4 @@ public class Persona {
 
     @OneToOne(mappedBy = "persona")
     private Usuario usuario;
-
 }

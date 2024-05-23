@@ -14,9 +14,10 @@ import java.util.Optional;
 
 @Repository
     public interface IPersonaDao extends JpaRepository<Persona,Long> {
-    @Query("SELECT new com.utp.spring.models.dto.PersonaUsuarioDTO(p.id AS personaId, p.nombre AS personaNombre, u.id AS usuarioId, u.correo AS usuarioCorreo, u.password AS usuarioContraseña, u.estado AS estadoUsuario) " +
+    @Query("SELECT new com.utp.spring.models.dto.PersonaUsuarioDTO(p.id AS personaId, p.nombre AS personaNombre, u.id AS usuarioId, pr.nombre AS usuarioPrivilegio, u.correo AS usuarioCorreo, u.password AS usuarioContraseña, u.estado AS estadoUsuario) " +
             "FROM Persona p " +
             "JOIN p.usuario u " +
+            "JOIN u.privilegio pr "+
             "WHERE u.correo LIKE :correo ")
     Optional<PersonaUsuarioDTO> findByEmail(@Param("correo") String correo);
 

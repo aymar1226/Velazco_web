@@ -10,6 +10,7 @@ public class PersonaUsuarioDTO {
     private Long personaId;
     private String personaNombre;
     private Long usuarioId;
+    private String usuarioPrivilegio;
     private String usuarioCorreo;
     private String usuarioContraseña;
     private char estadoUsuario;

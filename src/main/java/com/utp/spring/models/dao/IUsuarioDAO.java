@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @Repository
 public interface IUsuarioDAO extends JpaRepository<Usuario,Long> {
+
     @Query(
             value = "SELECT * FROM usuario WHERE usuario.correo LIKE ?1 AND usuario.estado = 1",
             nativeQuery = true

@@ -18,7 +18,10 @@ public class CorsConfig {
                         .allowedMethods("*")
                         .exposedHeaders("*");
 
-                registry.addMapping("/api/**")
+                registry.addMapping("/api/productos/**")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("*");
+                registry.addMapping("/api/categorias/**")
                         .allowedOrigins("http://localhost:4200")
                         .allowedMethods("*");
 
@@ -26,6 +29,10 @@ public class CorsConfig {
                         .allowedOrigins("http://localhost:4200")
                         .allowedMethods("*");
 
+                registry.addMapping("/api/carrito/**")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("*")
+                        .exposedHeaders("*");
             }
         };
     }

@@ -1,5 +1,6 @@
 package com.utp.spring.services;
 
+import com.utp.spring.models.dto.ProductoDTO;
 import com.utp.spring.models.entity.Orden;
 import com.utp.spring.models.entity.Usuario;
 
@@ -12,4 +13,5 @@ public interface IOrdenService {
 	Orden save (Orden orden);
 	String generarNumeroOrden();
 	List<Orden> findByUsuario (Usuario usuario);
+	public Orden realizarVenta(List<ProductoDTO> productos, Usuario usuario);
 }
