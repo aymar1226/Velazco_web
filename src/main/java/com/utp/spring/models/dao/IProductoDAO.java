@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface IProductoDAO extends JpaRepository<Producto,Long>{
-    @Query("SELECT p FROM Producto p JOIN p.categoria c WHERE c.id = :categoriaID")
+    @Query("SELECT p FROM Producto p JOIN p.categoria c WHERE c.id = :categoriaID AND p.estado = '1'")
     List<Producto> findAll(@Param("categoriaID") Long categoriaID);
 
     @Query("SELECT p.imagen FROM Producto p WHERE p.id = :productoId")

@@ -7,7 +7,12 @@ import lombok.Data;
 
 @Data
 public class RegistroDTO {
-    private Usuario usuario;
-    private Persona persona;
-    private Cliente cliente;
+    private String correo;
+    private String password;
+    private String documento;
+    private String nombre;
+    private String ap_paterno;
+    private String ap_materno;
+    private String telefono;
+    private String direccion;
 }

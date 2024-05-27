@@ -6,6 +6,8 @@ import com.utp.spring.services.IEmpleadoService;
 import com.utp.spring.services.IRolService;
 import com.utp.spring.services.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,8 +17,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
-@RequestMapping("/empleado")
+@RestController
+@RequestMapping("api/empleados")
 public class EmpleadoController {
 
     @Autowired
@@ -29,8 +31,44 @@ public class EmpleadoController {
     @Autowired
     private IRolService rolService;
 
-    BCryptPasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
 
+
+    @GetMapping("/lista")
+    public List<Empleado> listarEmpleados() {
+        return empleadoService.findAll();
+    }
+
+    @GetMapping("/cargo/lista")
+    public List<Cargo> listarCategoria(){
+        List<Cargo> listaCargos = cargoService.findAll();
+        return listaCargos;
+    }
+
+    @PostMapping("/agregar")
+    public ResponseEntity<Empleado> agregarEmpleado(@RequestBody Empleado empleado) {
+        try {
+            System.out.println(empleado);
+            Empleado nuevoEmpleado = empleadoService.save(empleado);
+            return new ResponseEntity<>(nuevoEmpleado, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/crearusuario")
+    public ResponseEntity<Usuario> crearUsuarioAEmpleado(Persona persona) {
+        try {
+            System.out.println(persona);
+            Usuario nuevoUsuario = empleadoService.crearUsuarioAEmpleado(persona);
+            return new ResponseEntity<>(nuevoUsuario, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+        /*--------------------------------------CONTROLLERS-------------------------------------------------------------------*/
+    BCryptPasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
 
     @GetMapping("/lista_empleados")
     public String listarEmpleados(Model modelo){

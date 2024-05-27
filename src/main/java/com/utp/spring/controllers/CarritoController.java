@@ -25,10 +25,10 @@ public class CarritoController {
     @Autowired
     private ICarritoItemService carritoItemService;
 
-    @PostMapping("/crear")
-    public ResponseEntity<Carrito> crearCarrito( @RequestBody Usuario usuario) {
+    @PostMapping("/crear/{correo}")
+    public ResponseEntity<Carrito> crearCarrito( @PathVariable String correo) {
         try {
-            Carrito nuevoCarrito= carritoService.save(usuario);
+            Carrito nuevoCarrito= carritoService.save(correo);
             return new ResponseEntity<>(nuevoCarrito, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -59,6 +59,16 @@ public class CarritoController {
     @GetMapping("/item/lista/{correo}")
     public List<CarritoItem> listarItems(@PathVariable String correo ) {
         return carritoItemService.findAll(correo);
+    }
+
+    @DeleteMapping("/item/eliminar/{id}")
+    public ResponseEntity<Void> eliminarItems(@PathVariable Long id){
+        try {
+            carritoItemService.deleteItem(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package com.utp.spring.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -27,6 +28,7 @@ public class Carrito {
 
     @OneToOne
     @JoinColumn(name = "usuario_id")
+    @JsonBackReference
     private Usuario usuario;
 
 

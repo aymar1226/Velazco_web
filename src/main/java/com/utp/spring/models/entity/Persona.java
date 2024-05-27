@@ -1,5 +1,7 @@
 package com.utp.spring.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -24,6 +26,13 @@ public class Persona {
     private String direccion;
     private char estado;
 
-    @OneToOne(mappedBy = "persona")
+    @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("persona")
     private Usuario usuario;
+
+    @OneToOne(mappedBy = "persona", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("persona")
+    private Empleado empleado;
+
+
 }

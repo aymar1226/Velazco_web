@@ -46,8 +46,20 @@ public class UsuarioController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
+    @GetMapping("/email/{correo}")
+    public ResponseEntity<Usuario> getUsuariobyCorreo(@PathVariable String correo) {
+        return usuarioService.findByEmail(correo)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+
+
+
     @PostMapping("/registrar")
-    public  ResponseEntity<Persona> registrarUsuario(RegistroDTO registroDTO){
+    public  ResponseEntity<Persona> registrarUsuario(@RequestBody RegistroDTO registroDTO){
+        System.out.println(registroDTO);
+
         try {
             Persona nuevaPersona = personaService.save(registroDTO);
             return new ResponseEntity<>(nuevaPersona, HttpStatus.CREATED);
@@ -55,6 +67,12 @@ public class UsuarioController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/lista")
+    public List<Usuario> listarUsuarios() {
+        return usuarioService.findAll();
+    }
+
 
 
     //---------------------------Controllers----------------------------------------//

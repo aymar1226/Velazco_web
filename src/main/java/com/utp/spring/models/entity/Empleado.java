@@ -1,14 +1,16 @@
 package com.utp.spring.models.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "empleado")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Empleado {
 
     @Id
@@ -18,8 +20,9 @@ public class Empleado {
     private char estado;
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL) // Aquí agregamos CascadeType.ALL
     @JoinColumn(name = "persona_id")
+    @JsonIgnoreProperties("empleado")
     private Persona persona;
 
     @ManyToOne

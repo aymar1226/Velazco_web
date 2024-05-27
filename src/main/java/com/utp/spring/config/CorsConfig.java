@@ -33,6 +33,22 @@ public class CorsConfig {
                         .allowedOrigins("http://localhost:4200")
                         .allowedMethods("*")
                         .exposedHeaders("*");
+
+                registry.addMapping("/api/usuarios/**")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("*");
+
+                registry.addMapping("/api/clientes/**")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("*");
+
+                registry.addMapping("/api/empleados/**")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("*");
+
+                registry.addMapping("/api/proveedores/**")
+                        .allowedOrigins("http://localhost:4200")
+                        .allowedMethods("*");
             }
         };
     }

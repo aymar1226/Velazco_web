@@ -13,12 +13,21 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
-@RequestMapping("/proveedor")
+@RestController
+@RequestMapping("/api/proveedores")
 public class ProveedorController {
 
     @Autowired
     private IProveedorService proveedorService;
+
+    @GetMapping("/lista")
+    public List<Proveedor> listarProveedores() {
+        return proveedorService.findAll();
+    }
+
+
+
+/*--------------------------------------Controllers---------------------------------------------*/
     @GetMapping("/lista_proveedores")
     public String listarProveedores(Model modelo){
         List<Proveedor> listaProveedores= proveedorService.findAll();

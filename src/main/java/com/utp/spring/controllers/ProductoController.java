@@ -80,6 +80,16 @@ public class ProductoController {
         }
     }
 
+    @PutMapping("delete/{id}")
+    public ResponseEntity updateProducto(@PathVariable Long id) {
+        try {
+            productoService.delete(id);
+            return new ResponseEntity<>( HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     //Obtener producto por categoria
     @GetMapping("/menu/{id}")
     public List<Producto> filtrarPorCategoria(@PathVariable Long id){

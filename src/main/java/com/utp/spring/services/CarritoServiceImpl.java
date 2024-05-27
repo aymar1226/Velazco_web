@@ -2,9 +2,9 @@ package com.utp.spring.services;
 
 import com.utp.spring.models.dao.ICarritoDao;
 import com.utp.spring.models.dao.IProductoDAO;
+import com.utp.spring.models.dao.IUsuarioDAO;
 import com.utp.spring.models.dto.ProductoDTO;
 import com.utp.spring.models.entity.Carrito;
-import com.utp.spring.models.entity.Orden;
 import com.utp.spring.models.entity.Producto;
 import com.utp.spring.models.entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +25,24 @@ public class CarritoServiceImpl implements ICarritoService {
     @Autowired
     private IProductoDAO productoDAO;
 
-    @Override
-    public Carrito save(Usuario usuario) {
+    @Autowired
+    private IUsuarioDAO usuarioDAO;
 
-        LocalDateTime now = LocalDateTime.now();
-        Carrito carrito = new Carrito();
-        carrito.setUsuario(usuario);
-        carrito.setFecha_creacion(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()));
-        return carritoDao.save(carrito);
+    @Override
+    public Carrito save(String correo) {
+        Carrito carritoExiste =carritoDao.findByEmail(correo);
+
+        if (carritoExiste == null) {
+            Optional<Usuario> optionalUsuario = usuarioDAO.findByEmail(correo);
+            Usuario usuario = optionalUsuario.orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+            LocalDateTime now = LocalDateTime.now();
+            Carrito carrito = new Carrito();
+            carrito.setUsuario(usuario);
+            carrito.setFecha_creacion(Date.from(now.atZone(ZoneId.systemDefault()).toInstant()));
+            return carritoDao.save(carrito);
+        }
+        throw new RuntimeException("El usuario ya tiene un carrito asociado");
     }
 
     @Override

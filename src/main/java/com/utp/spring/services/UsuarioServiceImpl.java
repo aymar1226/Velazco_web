@@ -22,6 +22,7 @@ public class UsuarioServiceImpl implements IUsuarioService{
 
     @Override
     public List<Usuario> findAll() {
+
         return usuarioDAO.findAll();
     }
 

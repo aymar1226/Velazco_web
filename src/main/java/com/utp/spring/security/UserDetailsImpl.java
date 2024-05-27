@@ -6,6 +6,7 @@ import com.utp.spring.models.entity.Usuario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,12 +20,12 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList();
+        return Collections.singleton(new SimpleGrantedAuthority(persona.getUsuarioPrivilegio()));
     }
 
     @Override
     public String getPassword() {
-        return persona.getUsuarioContraseña();
+        return persona.getUsuarioContrasenia();
     }
 
     @Override

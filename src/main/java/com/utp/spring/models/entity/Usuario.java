@@ -1,5 +1,8 @@
 package com.utp.spring.models.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import jakarta.persistence.*;
@@ -29,17 +32,22 @@ public class Usuario {
     private String password;
     private char estado;
 
-
-    @OneToMany(mappedBy = "usuario")
-    private List<Orden> ordenes;
+//    @OneToMany(mappedBy = "usuario")
+ //   private List<Orden> ordenes;
 
     @ManyToOne
     @JoinColumn(name = "privilegio_id")
+
     private Privilegio privilegio;
 
 
     @OneToOne
     @JoinColumn(name = "persona_id")
+    @JsonIgnoreProperties("usuario")
     private Persona persona;
 
+
+    @OneToOne(mappedBy = "usuario")
+    @JsonManagedReference // Esta anotación indica que esta es la parte "administrada" de la relación
+    private Carrito carrito;
 }

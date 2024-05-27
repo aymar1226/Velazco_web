@@ -12,7 +12,7 @@ public class PersonaUsuarioDTO {
     private Long usuarioId;
     private String usuarioPrivilegio;
     private String usuarioCorreo;
-    private String usuarioContraseña;
+    private String usuarioContrasenia;
     private char estadoUsuario;
 
     public PersonaUsuarioDTO(Long personaId, String personaNombre, Long usuarioId, String usuarioCorreo, String usuarioContraseña, char estadoUsuario) {
@@ -20,7 +20,7 @@ public class PersonaUsuarioDTO {
         this.personaNombre = personaNombre;
         this.usuarioId = usuarioId;
         this.usuarioCorreo = usuarioCorreo;
-        this.usuarioContraseña = usuarioContraseña;
+        this.usuarioContrasenia = usuarioContrasenia;
         this.estadoUsuario=estadoUsuario;
     }
 }

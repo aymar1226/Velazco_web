@@ -29,6 +29,7 @@ public class ProductoServiceImpl implements IProductoService {
 
     @Override
     public Producto save(Producto producto) {
+
         IProductoDAO.save(producto);
         return producto;
     }
@@ -37,7 +38,12 @@ public class ProductoServiceImpl implements IProductoService {
 
     @Override
     public void delete(Long id) {
-        IProductoDAO.deleteById(id);
+        Optional<Producto> producto=IProductoDAO.findById(id);
+        if(producto.isPresent()){
+            Producto productoAEliminar = producto.get();
+            productoAEliminar.setEstado('0');
+            IProductoDAO.save(productoAEliminar);
+        }
     }
 
     @Override

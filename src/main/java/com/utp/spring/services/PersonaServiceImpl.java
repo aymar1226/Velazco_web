@@ -44,39 +44,44 @@ public class PersonaServiceImpl implements IPersonaService {
 
     @Override
     public Persona save(RegistroDTO registroDTO) {
+        //registrando si el usuario ya existe
+        Optional<Usuario> usuarioExiste = usuarioDAO.findByEmail(registroDTO.getCorreo());
 
-        //Guardar persona
-        Persona persona= new Persona();
-        persona.setAp_paterno(registroDTO.getPersona().getAp_paterno());
-        persona.setAp_materno(registroDTO.getPersona().getAp_materno());
-        persona.setDireccion(registroDTO.getPersona().getDireccion());
-        persona.setDocumento(registroDTO.getPersona().getDocumento());
-        persona.setTelefono(registroDTO.getPersona().getTelefono());
-        persona.setEstado('1');
+        if(usuarioExiste.isEmpty()){
+            //Guardar persona
+            Persona persona= new Persona();
+            persona.setNombre(registroDTO.getNombre());
+            persona.setAp_paterno(registroDTO.getAp_paterno());
+            persona.setAp_materno(registroDTO.getAp_materno());
+            persona.setDireccion(registroDTO.getDireccion());
+            persona.setDocumento(registroDTO.getDocumento());
+            persona.setTelefono(registroDTO.getTelefono());
+            persona.setEstado('1');
 
-        Persona personaGuardada = personaDao.save(persona); // Guardar persona
+            Persona personaGuardada = personaDao.save(persona); // Guardar persona
 
 
-        if(personaGuardada!=null){
+            if(personaGuardada!=null){
 
-            //Guardar usuario
-            Usuario usuario= new Usuario();
-            usuario.setCorreo(registroDTO.getUsuario().getCorreo());
-            usuario.setPassword(new BCryptPasswordEncoder().encode(registroDTO.getUsuario().getPassword()));
-            Privilegio privilegio = privilegioDAO.findById(1L).orElse(null);
-            usuario.setPrivilegio(privilegio);
-            usuario.setEstado('1');
-            usuario.setPersona(personaGuardada);
-            usuarioDAO.save(usuario);
+                //Guardar usuario
+                Usuario usuario= new Usuario();
+                usuario.setCorreo(registroDTO.getCorreo());
+                usuario.setPassword(new BCryptPasswordEncoder().encode(registroDTO.getPassword()));
+                Privilegio privilegio = privilegioDAO.findById(1L).orElse(null);
+                usuario.setPrivilegio(privilegio);
+                usuario.setEstado('1');
+                usuario.setPersona(personaGuardada);
+                usuarioDAO.save(usuario);
 
-            //Guardar como Cliente
-            Cliente cliente = new Cliente();
-            cliente.setPersona(personaGuardada);
-            cliente.setEstado('1');
-            clienteDAO.save(cliente);
+                //Guardar como Cliente
+                Cliente cliente = new Cliente();
+                cliente.setPersona(personaGuardada);
+                cliente.setEstado('1');
+                clienteDAO.save(cliente);
+            }
+            return personaGuardada;
         }
-
-        return personaGuardada;
+        throw new RuntimeException("El usuario con el correo "+registroDTO.getCorreo()+" ya existe");
     }
 
     @Override

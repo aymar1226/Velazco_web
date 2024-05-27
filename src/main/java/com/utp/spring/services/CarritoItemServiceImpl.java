@@ -67,14 +67,9 @@ public class CarritoItemServiceImpl implements ICarritoItemService {
     }
 
     @Override
-    public void deleteItem(String correo, ProductoDTO productoDTO) {
+    public void deleteItem(Long id) {
 
-        Carrito carrito = carritoDao.findByEmail(correo);
-
-        Producto producto = productoDAO.findById(productoDTO.getId()).orElseThrow(() -> new RuntimeException("Producto no encontrado"));
-
-        // Busca el item del carrito
-        Optional<CarritoItem> itemAEliminar = carritoItemDao.findByCarritoAndProducto(carrito.getId(), producto.getId());
+        Optional<CarritoItem> itemAEliminar = carritoItemDao.findById(id);
 
         if(itemAEliminar.isPresent()){
             carritoItemDao.deleteById(itemAEliminar.get().getId());

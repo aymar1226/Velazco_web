@@ -11,7 +11,7 @@ public interface ICarritoItemService {
 
     public CarritoItem save (String correo,ProductoDTO productoDTO);
     public List<CarritoItem> findAll(String correo);
-    public void deleteItem (String correo,ProductoDTO productoDTO);
+    public void deleteItem (Long id);
 
 
 }
