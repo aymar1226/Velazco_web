@@ -16,7 +16,7 @@ public interface IEmpleadoService {
     List<Empleado> findAll();
     @Transactional
     Empleado save(Empleado empleado);
-    void delete(Long id);
+    void delete(Empleado empleado);
     @Transactional
     Usuario crearUsuarioAEmpleado(PersonaUsuarioDTO persona);
 }

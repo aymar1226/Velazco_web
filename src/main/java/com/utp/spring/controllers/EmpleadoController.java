@@ -70,8 +70,20 @@ public class EmpleadoController {
         }
     }
 
+    @PutMapping("/delete")
+    public ResponseEntity deleteProducto(@RequestBody Empleado empleado) {
+        System.out.println(empleado);
+        try {
+            empleadoService.delete(empleado);
+            return new ResponseEntity<>( HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
-        /*--------------------------------------CONTROLLERS-------------------------------------------------------------------*/
+
+
+    /*--------------------------------------CONTROLLERS-------------------------------------------------------------------*/
     BCryptPasswordEncoder passwordEncoder= new BCryptPasswordEncoder();
 
     @GetMapping("/lista_empleados")

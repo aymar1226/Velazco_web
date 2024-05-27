@@ -4,6 +4,7 @@ import com.utp.spring.models.dao.IProveedorDAO;
 import com.utp.spring.models.entity.Proveedor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +31,15 @@ public class ProveedorServiceImpl implements IProveedorService{
     }
 
     @Override
-    public void delete(Long id) {
-        proveedorDAO.deleteById(id);
+    public void delete(Proveedor proveedor) {
+        proveedor.setEstado('0');
+        proveedorDAO.save(proveedor);
+    }
+
+    @Override
+    @Transactional
+    public Proveedor update(Proveedor proveedor) {
+
+        return proveedorDAO.save(proveedor);
     }
 }

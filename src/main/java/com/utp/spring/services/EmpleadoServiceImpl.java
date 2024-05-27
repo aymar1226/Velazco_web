@@ -48,8 +48,36 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
     }
 
     @Override
-    public void delete(Long id) {
-        empleadoDAO.deleteById(id);
+    @Transactional
+    public void delete(Empleado empleado) {
+
+        empleado.setEstado('0');
+
+        Persona personaAEliminar = empleado.getPersona();
+        Optional<Usuario> optionalUsuario = usuarioDAO.findByPersona(personaAEliminar.getId());
+
+        if (optionalUsuario.isPresent()) {
+            Usuario usuario = optionalUsuario.get();
+            System.out.println(usuario);
+
+            // Cambia el estado de persona y usuario a '0'
+            personaAEliminar.setEstado('0');
+            usuario.setEstado('0');
+
+            // Actualiza las relaciones
+            empleado.setPersona(personaAEliminar);
+            usuario.setPersona(personaAEliminar);
+
+            // Guarda los cambios en las entidades
+            empleadoDAO.save(empleado);
+            personaDao.save(personaAEliminar);
+            usuarioDAO.save(usuario);
+        } else {
+            personaAEliminar.setEstado('0');
+            empleado.setPersona(personaAEliminar);
+            personaDao.save(personaAEliminar);
+            empleadoDAO.save(empleado);
+        }
     }
 
     @Override

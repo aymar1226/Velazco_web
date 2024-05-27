@@ -1,14 +1,14 @@
 package com.utp.spring.models.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "proveedor")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Proveedor {
 
     @Id
