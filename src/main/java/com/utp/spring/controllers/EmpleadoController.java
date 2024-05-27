@@ -1,5 +1,6 @@
 package com.utp.spring.controllers;
 
+import com.utp.spring.models.dto.PersonaUsuarioDTO;
 import com.utp.spring.models.entity.*;
 import com.utp.spring.services.ICargoService;
 import com.utp.spring.services.IEmpleadoService;
@@ -56,12 +57,15 @@ public class EmpleadoController {
     }
 
     @PostMapping("/crearusuario")
-    public ResponseEntity<Usuario> crearUsuarioAEmpleado(Persona persona) {
+    public ResponseEntity<Usuario> crearUsuarioAEmpleado(@RequestBody PersonaUsuarioDTO persona) {
+
+        System.out.println(persona);
+
         try {
-            System.out.println(persona);
             Usuario nuevoUsuario = empleadoService.crearUsuarioAEmpleado(persona);
             return new ResponseEntity<>(nuevoUsuario, HttpStatus.CREATED);
         } catch (Exception e) {
+
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

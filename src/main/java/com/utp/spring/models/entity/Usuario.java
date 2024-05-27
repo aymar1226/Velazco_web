@@ -41,7 +41,7 @@ public class Usuario {
     private Privilegio privilegio;
 
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "persona_id")
     @JsonIgnoreProperties("usuario")
     private Persona persona;

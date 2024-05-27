@@ -81,7 +81,7 @@ public class ProductoController {
     }
 
     @PutMapping("delete/{id}")
-    public ResponseEntity updateProducto(@PathVariable Long id) {
+    public ResponseEntity deleteProducto(@PathVariable Long id) {
         try {
             productoService.delete(id);
             return new ResponseEntity<>( HttpStatus.OK);

@@ -2,12 +2,15 @@ package com.utp.spring.services;
 
 import com.utp.spring.models.dao.IEmpleadoDAO;
 import com.utp.spring.models.dao.IPersonaDao;
+import com.utp.spring.models.dao.IPrivilegioDAO;
 import com.utp.spring.models.dao.IUsuarioDAO;
+import com.utp.spring.models.dto.PersonaUsuarioDTO;
 import com.utp.spring.models.entity.Empleado;
 import com.utp.spring.models.entity.Persona;
 import com.utp.spring.models.entity.Usuario;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +26,8 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
 
     @Autowired
     private IUsuarioDAO usuarioDAO;
+    @Autowired
+    private IPrivilegioDAO privilegioDAO;
 
     @Override
     public Optional<Empleado> findbyId(Long id) {
@@ -48,14 +53,20 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
     }
 
     @Override
-    public Usuario crearUsuarioAEmpleado(Persona persona) {
+    public Usuario crearUsuarioAEmpleado(PersonaUsuarioDTO persona) {
 
-        Optional<Usuario> usuarioExistente = usuarioDAO.findByPersona(persona.getId());
+        Optional<Usuario> usuarioExistente = usuarioDAO.findByPersona(persona.getPersonaId());
 
         if(usuarioExistente.isEmpty()){
 
+
+            Optional<Persona> personaObtenida= personaDao.findById(persona.getPersonaId());
             Usuario usuario= new Usuario();
-            usuario.setPersona(persona);
+            usuario.setPersona(personaObtenida.get());
+            usuario.setCorreo(persona.getUsuarioCorreo());
+            usuario.setPassword(new BCryptPasswordEncoder().encode(persona.getUsuarioContrasenia()));
+            usuario.setPrivilegio(privilegioDAO.findByNombre(persona.getUsuarioPrivilegio()).get());
+            usuario.setEstado('1');
 
             return usuarioDAO.save(usuario);
         }

@@ -1,6 +1,7 @@
 package com.utp.spring.services;
 
 
+import com.utp.spring.models.dto.PersonaUsuarioDTO;
 import com.utp.spring.models.entity.Empleado;
 import com.utp.spring.models.entity.Persona;
 import com.utp.spring.models.entity.Usuario;
@@ -16,5 +17,6 @@ public interface IEmpleadoService {
     @Transactional
     Empleado save(Empleado empleado);
     void delete(Long id);
-    Usuario crearUsuarioAEmpleado(Persona persona);
+    @Transactional
+    Usuario crearUsuarioAEmpleado(PersonaUsuarioDTO persona);
 }

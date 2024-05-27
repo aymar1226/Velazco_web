@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class PersonaUsuarioDTO {
+
     private Long personaId;
     private String personaNombre;
     private Long usuarioId;
@@ -14,13 +16,4 @@ public class PersonaUsuarioDTO {
     private String usuarioCorreo;
     private String usuarioContrasenia;
     private char estadoUsuario;
-
-    public PersonaUsuarioDTO(Long personaId, String personaNombre, Long usuarioId, String usuarioCorreo, String usuarioContraseña, char estadoUsuario) {
-        this.personaId = personaId;
-        this.personaNombre = personaNombre;
-        this.usuarioId = usuarioId;
-        this.usuarioCorreo = usuarioCorreo;
-        this.usuarioContrasenia = usuarioContrasenia;
-        this.estadoUsuario=estadoUsuario;
-    }
 }
