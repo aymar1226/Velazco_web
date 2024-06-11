@@ -5,27 +5,30 @@ import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class TokenUtils {
 
     private final static String ACCESS_TOKEN_SECRET = "4qhq8LrEBfYcaRHxhdb9zURb2rf8e7Ud";
     private final static Long ACCESS_TOKEN_VALIDITY_SECONDS = 2_592_000L;
 
-    public static String createToken(String nombre, String email){
+    public static String createToken(UserDetailsImpl userDetails){
         long expirationTime = ACCESS_TOKEN_VALIDITY_SECONDS * 1_000;
         Date expirationDate = new Date(System.currentTimeMillis() + expirationTime);
 
         Map<String, Object> extra = new HashMap<>();
-        extra.put("nombre", nombre);
-        extra.put("email",email);
+        extra.put("nombre", userDetails.getNombre());
+        extra.put("email",userDetails.getUsername());
+        extra.put("roles", userDetails.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList()));
 
         return Jwts.builder()
-                .setSubject(email)
+                .setSubject(userDetails.getUsername())
                 .setExpiration(expirationDate)
                 .addClaims(extra)
                 .signWith(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes()))
@@ -41,7 +44,13 @@ public class TokenUtils {
                     .getBody();
             String email = claims.getSubject();
 
-            return new UsernamePasswordAuthenticationToken(email, null, Collections.emptyList());
+
+            List<String> roles = (List<String>) claims.get("roles");
+            List<GrantedAuthority> authorities = roles.stream()
+                    .map(SimpleGrantedAuthority::new)
+                    .collect(Collectors.toList());
+
+            return new UsernamePasswordAuthenticationToken(email, null, authorities);
         }catch (JwtException e){
             return null;
         }

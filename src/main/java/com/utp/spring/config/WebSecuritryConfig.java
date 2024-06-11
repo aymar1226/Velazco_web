@@ -40,8 +40,7 @@ public class WebSecuritryConfig {
                 .requestMatchers("/api/carrito/**").permitAll()
                 .requestMatchers("/api/usuarios/email/**").permitAll()
                 .requestMatchers("/api/usuarios/registrar").permitAll()
-
-//                .requestMatchers("/api/productos/lista").hasAuthority("user")
+                .requestMatchers("/api/productos/lista").hasAuthority("user")
                 .anyRequest()
                 .authenticated()
                 .and()
