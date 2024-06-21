@@ -9,5 +9,5 @@ import java.util.List;
 public interface ICarritoService {
 
     public Carrito save (String correo);
-    public Carrito update (String correo, List<ProductoDTO> productos);
+    public Carrito update (String correo);
 }

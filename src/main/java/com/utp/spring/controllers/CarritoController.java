@@ -6,8 +6,10 @@ import com.utp.spring.models.entity.Carrito;
 import com.utp.spring.models.entity.CarritoItem;
 import com.utp.spring.models.entity.Producto;
 import com.utp.spring.models.entity.Usuario;
+import com.utp.spring.security.JWTUtils;
 import com.utp.spring.services.ICarritoItemService;
 import com.utp.spring.services.ICarritoService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,9 @@ import java.util.List;
 @RestController
 @RequestMapping("api/carrito")
 public class CarritoController {
+
+    @Autowired
+    private JWTUtils jwtUtils;
 
     @Autowired
     private ICarritoService carritoService;
@@ -47,9 +52,11 @@ public class CarritoController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Carrito> updateCarrito(@RequestBody String correo, @RequestBody List<ProductoDTO> productos){
+    public ResponseEntity<Carrito> updateCarrito(HttpServletRequest request){
         try {
-            Carrito carritoActualizado= carritoService.update(correo,productos);
+            String correo = jwtUtils.extractEmailFromRequest(request);
+            System.out.println(correo);
+            Carrito carritoActualizado= carritoService.update(correo);
             return new ResponseEntity<>(carritoActualizado,HttpStatus.CREATED);
         }catch (Exception e){
             return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);

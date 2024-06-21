@@ -30,7 +30,6 @@ public class CarritoItem {
     @ManyToOne
     @JoinColumn(name = "carrito_id")
     @JsonBackReference   // Esta anotación indica que esta es la parte "no administrada" de la relación
-
     private Carrito carrito;
 
 

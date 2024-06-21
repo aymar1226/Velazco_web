@@ -2,9 +2,15 @@ package com.utp.spring.models.dao;
 
 import com.utp.spring.models.entity.Carrito;
 
+import com.utp.spring.models.entity.CarritoItem;
+import com.utp.spring.models.entity.Producto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ICarritoDao extends JpaRepository<Carrito,Long> {
@@ -16,6 +22,12 @@ public interface ICarritoDao extends JpaRepository<Carrito,Long> {
                     "WHERE u.correo = ?1",
             nativeQuery = true
     )
-    Carrito findByEmail(String correo);
+    Optional<Carrito> findByEmail(String correo);
+
+    @Query("SELECT it FROM CarritoItem it " +
+            "JOIN Carrito c ON c.id=it.carrito.id " +
+            "WHERE c.id = :idCarrito"
+    )
+    List<CarritoItem> findTotal(@Param("idCarrito")Long idCarrito);
 
 }

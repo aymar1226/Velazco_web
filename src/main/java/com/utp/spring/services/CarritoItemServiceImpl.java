@@ -29,7 +29,7 @@ public class CarritoItemServiceImpl implements ICarritoItemService {
     @Override
     public CarritoItem save(String correo, ProductoDTO productoDTO) {
 
-        Carrito carrito = carritoDao.findByEmail(correo);
+        Carrito carrito = carritoDao.findByEmail(correo).get();
 
         Producto producto = productoDAO.findById(productoDTO.getId()).orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
@@ -58,7 +58,7 @@ public class CarritoItemServiceImpl implements ICarritoItemService {
     @Override
     public List<CarritoItem> findAll(String correo) {
 
-        Carrito carrito = carritoDao.findByEmail(correo);
+        Carrito carrito = carritoDao.findByEmail(correo).get();
 
         if(carrito!=null){
             return carritoItemDao.findByCarrito(carrito.getId());

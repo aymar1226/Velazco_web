@@ -24,6 +24,7 @@ public class WebSecuritryConfig {
     private final JWTAuthorizationFilter jwtAuthorizationFilter;
 
 
+
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
         JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter();
@@ -40,6 +41,7 @@ public class WebSecuritryConfig {
                 .requestMatchers("/api/carrito/**").permitAll()
                 .requestMatchers("/api/usuarios/email/**").permitAll()
                 .requestMatchers("/api/usuarios/registrar").permitAll()
+                .requestMatchers("/api/payment/**").permitAll()
                 .requestMatchers("/api/productos/lista").hasAuthority("user")
                 .anyRequest()
                 .authenticated()
@@ -78,5 +80,7 @@ public class WebSecuritryConfig {
     public static void main(String[] args) {
         System.out.println("pass: "+new BCryptPasswordEncoder().encode("1234"));
     }
+
+
 
 }
